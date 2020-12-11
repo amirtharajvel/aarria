@@ -1,0 +1,121 @@
+<!-- Modal -->
+<div class="modal right fade" id="myModal2" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel2">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel2"
+					style="text-align: center">Cart</h4>
+			</div>
+			<div class="modal-body"
+				style="padding-left: 0px; padding-right: 0px;">
+				<div id="items" style="margin: 15px;">
+					<c:forEach items=""></c:forEach>
+				</div>
+				<div id="proceed">
+					<form action="checkout" id="cart_checkout_form">
+						<button type="button" onclick="window.location = '/checkout'"
+							id="checkout_button" class="btn btn-success">Checkout</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- modal-content -->
+
+</div>
+<!-- modal-dialog -->
+<!-- modal -->
+
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12 col-sm-4 col-md-2">
+			<ul>
+				<li class="dropdown-header">ABOUT US</li>
+				<li><a href="aboutus#who_we_are">Company</a></li>
+				<li><a href="aboutus#contact_us">Contact Us</a></li>
+				<li><a href="aboutus#contact_us">Customer Care</a></li>
+				<li><a href="aboutus#privacy_policy">Sell</a></li>
+			</ul>
+		</div>
+		<div class="col-xs-12 col-sm-4 col-md-2">
+			<ul>
+				<li class="dropdown-header">TOP CATEGORIES</li>
+				<li><a href="products?cat=4001"> Sarees </a></li>
+				<li><a href="products?cat=1"> Infants </a></li>
+				<li><a href="products?cat=5"> Men </a></li>
+				<li><a href="products?cat=4"> Women </a></li>
+			</ul>
+		</div>
+		<!-- <div class="col-xs-12 col-sm-4 col-md-2">
+			<ul>
+				<li class="dropdown-header">INFO</li>
+				<li><a href="">FAQ's</a></li>
+				<li><a href="">Payment Options</a></li>
+				<li><a href="">Sitemap</a></li>
+				<li><a href="">Ask a question</a></li>
+			</ul>
+		</div> -->
+		<div class="col-xs-12 col-sm-4 col-md-2">
+			<ul>
+				<li class="dropdown-header">POLICIES</li>
+				<li><a href="termsofservice">Terms & Conditions</a></li>
+				<li><a href="">Shipping & Refund Policies</a></li>
+				<li><a href="privacypolicy">Privacy Policy</a></li>
+			</ul>
+		</div>
+		<div class="col-xs-12 col-sm-4 col-md-3">
+			<ul>
+				<li class="dropdown-header">SUBSCRIBE</li>
+				<li>
+					<div class="newsletter-box text-center">
+						<h5>Email</h5>
+						<button class="btn  bg-gray" type="button">
+							Subscribe <i class="fa fa-long-arrow-right"> </i>
+						</button>
+					</div>
+				</li>
+			</ul>
+			<ul class="social">
+				<li><a
+					href="https://www.facebook.com/Fallsbuy-ECommerce-Private-Limited-466182097097548/">
+						<i class=" fa fa-facebook"> &nbsp; </i>
+				</a></li>
+				<li><a href="https://twitter.com/fallsbuy"> <i
+						class="fa fa-twitter"> &nbsp; </i>
+				</a></li>
+				<li><a href="https://plus.google.com/b/101725681861219438906/">
+						<i class="fa fa-google-plus"> &nbsp; </i>
+				</a></li>
+				<li><a href="https://in.pinterest.com/fallsbuy/"> <i
+						class="fa fa-pinterest"> &nbsp; </i>
+				</a></li>
+				<li><a
+					href="https://www.youtube.com/channel/UCoxko1xWXX9V8b9BWBbtCXg">
+						<i class="fa fa-youtube"> &nbsp; </i>
+				</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="footer-bottom">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-sm-8 col-md-8">
+				<span>Copyright © Fallsbuy ECommerce Private Limited 2016.</span>
+			</div>
+			<div class="col-xs-12 col-sm-4 col-md-4 text-right">
+				<ul class="nav nav-pills payments">
+					<li><i class="fa fa-cc-visa"></i></li>
+					<li><i class="fa fa-cc-mastercard"></i></li>
+					<li><i class="fa fa-cc-amex"></i></li>
+					<li><i class="fa fa-cc-paypal"></i></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

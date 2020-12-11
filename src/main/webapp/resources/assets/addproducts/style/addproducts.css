@@ -1,0 +1,101 @@
+.error {
+	padding-left: 185px;
+	color: red;
+}
+
+.cat_left_div {
+	float: left;
+	width: 29%;
+	text-align: right;
+}
+
+.cat_right_div {
+	float: left;
+	width: 60%;
+	padding-left: 31px;
+}
+
+#selectedcats {
+	display: none;
+}
+
+#colors {
+	display: none;
+}
+
+#category_div, #detail_images_div {
+	margin-bottom: 77px;
+}
+
+#thumbnail_div {
+	margin-bottom: 155px;
+}
+
+#general_error {
+	margin-bottom: 25px;
+}
+
+.color_btn {
+	border: none;
+	border-radius: 1px;
+	margin: 2px 0px;
+}
+
+#color_images_table td, #color_images_table th {
+	padding-top: 15px;
+	padding-bottom: 10px;
+	padding-left: 1px;
+	padding-right: 25px;
+	text-align: left;
+}
+
+#newMeasurementUnit {
+	display: none;
+}
+
+#available_sizes {
+	float: left;
+}
+
+#selected_sizes_div {
+	margin-left: 20px;
+	float: left;
+	display: none;
+}
+
+#add_new_size_button {
+	display: none;
+}
+
+#add_new_size {
+	display: none;
+}
+
+#sizes_selected {
+	display: none;
+}
+
+#addproducts_form .row {
+	margin-top: 2%;
+}
+
+.first_row {
+	width: 20%;
+}
+
+.fallsbuy_control {
+	
+}
+
+.half_width {
+	width: 50%;
+}
+
+.well {
+	padding-top: 0px;
+	padding-bottom: 10px;
+}
+
+.jumbotron {
+	background-color: white;
+}

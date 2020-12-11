@@ -1,0 +1,187 @@
+
+function loadDropDown() {
+	$
+			.ajax({
+				url : "menu/allCategories",
+				data : {
+					get_param : 'value'
+				},
+				success : function(data) {
+
+					$
+							.each(
+									data,
+									function(index, json) {
+
+										var html = "";
+
+										for (i = 0; i < json.length; ++i) {
+											var name = json[i].name;
+											var id = json[i].id;
+											var parentCategoryId = json[i].parentCategoryId;
+
+											var heading = '<ul class="col-sm-2 list-unstyled" id="go_menu_heading'
+													+ id
+													+ '"><li><p><strong>'
+													+ name;
+											var end_heading = '</strong></p></li></ul>';
+
+											if (parentCategoryId == 1) {
+												html = heading + end_heading;
+												$("#" + "go_menu").append(html);
+
+											} else {
+												var item = '<li><a href="#">'
+														+ name + '</a></li>';
+
+												$(
+														"#go_menu_heading"
+																+ parentCategoryId)
+														.append(item);
+
+											}
+										}
+									});
+				},
+				error : function(error) {
+					alert(error);
+				}
+			});
+}
+
+
+
+
+
+
+
+function listenRefinerHeadingButton() {
+
+	$('.refiner').click(function() {
+		alert('hello')
+	});
+
+	$('.collapse').on(
+			'shown.bs.collapse',
+			function() {
+				alert('shown.bs.collapse ' + JSON.stringify($(this).parent()));
+				$(this).parent().find(".glyphicon-plus").removeClass(
+						"glyphicon-plus").addClass("glyphicon-minus");
+			})
+			.on(
+					'hidden.bs.collapse',
+					function() {
+						alert('hidden.bs.collapse '
+								+ JSON.stringify($(this).parent()));
+						$(this).parent().find(".glyphicon-minus").removeClass(
+								"glyphicon-minus").addClass("glyphicon-plus");
+					});
+
+	$('.tree-toggle').click(function() {
+		$(this).parent().children('ul.tree').toggle(200);
+	});
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2)------------------------------------------------------------------------------------
+FullTextSession fullTextSession = org.hibernate.search.Search.getFullTextSession(getSession());  
+    QueryBuilder qb = fullTextSession.getSearchFactory().buildQueryBuilder().forEntity(Song.class).get();  
+
+    if(searchTerm==null || searchTerm.equals(""))
+        searchTerm="*";
+    else
+        searchTerm="*"+searchTerm+"*";
+    Query luceneQuery1 = qb.bool()
+            .should(qb.keyword().wildcard().onField("name").matching(searchTerm).createQuery())
+            .should(qb.keyword().wildcard().onField("album").matching(searchTerm).createQuery())
+            .should(qb.keyword().wildcard().onField("artist").matching(searchTerm).createQuery()).createQuery();
+    Query luceneQuery2 = qb.bool()
+            .must(qb.keyword().wildcard().onField("playList.place.id").matching(playlist.getPlace().getId()).createQuery())
+            .must(qb.keyword().wildcard().onField("playList.id").matching(playlist.getId()).createQuery())
+            .createQuery();
+    BooleanQuery finalLuceneQuery=new BooleanQuery();
+    finalLuceneQuery.add(luceneQuery1, BooleanClause.Occur.MUST);
+    finalLuceneQuery.add(luceneQuery2, BooleanClause.Occur.MUST);
+    FullTextQuery query = fullTextSession.createFullTextQuery(finalLuceneQuery, Song.class);
+    org.apache.lucene.search.Sort sort = new Sort(new SortField("nvotes",SortField.INT,true));
+    query.setSort(sort);
+    List<Song> songs = query.setFirstResult(page*limit).setMaxResults(limit).list();
+    
+3)--------------------------------------------------------------------------------------------
+ var local_props = new Bloodhound({
+        datumTokenizer: function (p) {
+            return Bloodhound.tokenizers.whitespace(p.name);
+        },
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        local: portfolio_props,
+        limit: 100
+    });
+
+    var remote_props = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        remote: 'properties/searchPropertiesLike?substr=%QUERY',
+        dupDetector: function(remoteMatch, localMatch) {
+            return remoteMatch.name === localMatch.name;
+        },
+        limit: 100
+    });
+
+    local_props.initialize();
+    remote_props.initialize();
+
+    $('#typeahead-property').typeahead({
+        hint: true,
+        highlight: true,
+        minLength: 2
+    },
+    {
+        name: 'port_properties',
+        displayKey: 'name',
+        source: local_props.ttAdapter(),
+        templates: {
+            header: '<h3>Your Portfolio Properties</h3>'
+        }
+    },
+    {
+        name: 'dir_properties',
+        displayKey: 'name',
+        source: remote_props.ttAdapter(),
+        templates: {
+            header: '<h3>Properties Directory</h3>'
+        }
+    });
+  4)----------------------------------------------------------------------------------
+#https://www.facebook.com/dialog/oauth?client_id=540849602746977&redirect_uri=http://localhost:8080/hasikasri/callback&scope=email
+# https://console.developers.google.com/apis/library?project=hasikasri-1151
+#https://accounts.google.com/o/oauth2/v2/auth?scope=email%20profile&redirect_uri=http://localhost:8080/hasikasri/googleCallback&response_type=code&client_id=594808748972-iar49e14t7k1rhpu9j8lrrpc4jt6cijs.apps.googleusercontent.com
+
+--------------------------------------------------------------------------------------
+Please provide product details like Size, Color, Type, Material, Pattern, Variant, Model,  Packaging Details etc
+--------------------------------------------------------------------------------------
+If color changes then the price will not change - it is a different product
+--------------------------------------------------------------------------------------
+http://stackoverflow.com/questions/1995080/hibernate-criteria-returns-children-multiple-times-with-fetchtype-eager
+---------------------------------------------------------------------------------------  

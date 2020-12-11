@@ -1,0 +1,71 @@
+# plus mark in categories menu if no sub categories. To reproduce, pass id of the menu that has only 1 sub menu
+# If we navigate to grand child we can move to parent only through bread crumbs
+# on refine search the space between checkbox and text increases
+# Make Lazy fetch join for refiners and attributes from categories
+# Check boxes does not have tick mark on firefox
+# MAKE ALL IMAGES INTO ONE IMAGE - IMAGE SPRITING
+# highlight the back to top button when scrolled to the end
+# Use chrome developer tools audit to enable performance
+# When back button clicked
+# display color with the names
+# price display
+# when checkbox ids are added to the url just make them unclear by adding special characters
+# sort drop down arrange alphabetically
+# refiners arrange alphabetically
+# on refresh assign the non existing sorting option to drop down
+# duplicates in search drop down
+# multi color in refiners
+# hide button for cart side window
+# from register page open sign in window
+# min and max price should be correct in listing
+# Ensure creating absolute constraints on database for possibilities
+# implement sessions everywhere including back button press
+# return order transfer money to wallet
+# check for sync and async clicks in ui
+# after user delete, when he signs up again decide to insert a new record or update old
+# for resend sms code also do verify
+# Important: If user not found in the review table - EntityNotFoundException - handle that
+# handle - session timeout exception
+# non reproducible bug in checkout - when login try to change the email
+# calculate city from pincode and store to db in add address
+# add city when add address by lookup
+# ADD ADDRESS FORM - CHECKOUT BLUR OPEN MODAL
+# for latest address change updated date in add address form - change this behavior
+# add vertical scroller to add address pop up
+# checkout by default password is remembered by browser creates issue
+# when no products in listing page scroll down - custom.js Line no - 244
+# If possible change namings in custom.js
+# Add products page allow only positive numbers
+# add products - file upload path separator character not platform independent
+# make mandatory to add products images
+# IF DIFFERENT SIZE IS DIFFERENT PRICE THEN CREATE AS A DIFFERENT PRODUCT AND LINK IT - !! IMPORTANT !!
+# Color wise image upload for single items front and back - currently only color images can be uploaded
+# add products - display file name again on error
+# add products - set selected categories
+# detail page - main banner image min height
+# if a page is post then if the url is entered as a get "GET is not supported" message redirect to last seen page
+# highlight current color image in detail page
+# Can remove quantity plus minus jquery css
+# JBOSS max-post-size for file upload
+# Image optimization in detail page
+# @Fetch (FetchMode.SELECT) - Performance considerations
+# No null check for password in checkout forgot password, new user
+# scroll up while loading next page from ndtv
+# on buy now change ajax call to submit
+# make sure the controllers gets called from only one place from js
+# in local storage edit - will it be updated in cart?
+# in cart no pid is used at all
+# add to cart animation
+# for 200-300 $3 for 301-500 $2 - implement
+# make static files host name to read from properties files
+# home page slider right side scroll not showing the image on its full
+# back button is not working
+
+
+after responsive
+# mega menu each green header left side gap in mobile (padding left should be adjusted)
+# in products, in pincode check if we shrink
+# jquery XmlHttpRequests is deprecated
+
+After 21-DEC-2017 - About to release
+# Back button manipulated - A bug is if we press back button from products then it'll go to home page 

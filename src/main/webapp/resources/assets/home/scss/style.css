@@ -1,0 +1,233 @@
+body, h1, h2, h3, h4, h5, h6, p, span, div, ul, li, ol, a {
+	color: #666;
+	margin: 0px;
+	padding: 0px;
+}
+
+.container-div {
+	padding-top: 100px;
+}
+
+.padding-0 {
+	padding: 0px;
+}
+
+header {
+	background: #323A3D;
+	padding: 10px 0;
+	height: 100px;
+	position: fixed;
+	width: 100%;
+	z-index: 100;
+}
+
+slider .carousel .carousel-control {
+	top: 45%;
+	font-size: 25px;
+	background: none;
+}
+
+.product-slide {
+	margin: 20px 0;
+}
+
+.product-slide h2 {
+	padding: 10px 0;
+}
+
+.product-slide .owl-carousel {
+	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+	padding: 40px 15px 10px 15px;
+}
+
+.product-slide .owl-carousel .item .prod-img {
+	min-height: 142px;
+}
+
+.product-slide .owl-carousel .item .price_info {
+	padding: 10px 0;
+}
+
+.product-slide .owl-carousel .item .price_info .strike {
+	color: #a4a4a4;
+}
+
+.product-slide .owl-carousel .item .price_info .original_price {
+	font-weight: bold;
+}
+
+.product-slide .owl-carousel .item .price_info .offer {
+	color: #62bd7f;
+}
+
+.product-slide .owl-carousel .owl-nav {
+	position: absolute;
+	top: 10px;
+	width: 40px;
+	right: 0px;
+}
+
+.product-slide .owl-carousel .owl-nav .fa {
+	font-size: 25px;
+}
+
+.product-slide .owl-carousel .owl-nav .disabled {
+	opacity: 0.5;
+}
+
+.product-slide .owl-carousel .owl-nav .owl-prev {
+	width: 20px;
+	float: left;
+}
+
+.product-slide .owl-carousel .owl-nav .owl-next {
+	width: 20px;
+	float: left;
+}
+
+.product-div .caption-div {
+	color: #666;
+	background: #333;
+	line-height: 300px;
+	font-size: 52px;
+	text-align: center;
+}
+
+.product-div #product_title {
+	font-size: 20px;
+}
+
+.product-div #price_value {
+	font-weight: bold;
+	font-size: 20px;
+}
+
+.product-div #quantity_container {
+	margin-top: 3%;
+}
+
+.product-div #add_to_cart {
+	margin-top: 3%;
+	padding-top: 3%;
+}
+
+.product-div #add_to_cart .btn {
+	width: 100%;
+}
+
+.product-div #accordion {
+	margin-top: 3%;
+	padding-top: 3%;
+	width: 100%;
+}
+
+/*---Common css---*/
+.breadcrumb {
+	background-color: #fcf7f7;
+	margin-top: 10px;
+}
+
+.footer-div {
+	background: #EDEFF1;
+	padding: 20px 15px 0 15px;
+}
+
+.footer-div ul .dropdown-header {
+	border-bottom: 1px solid #BAC1C8;
+	color: #54697E;
+	font-size: 18px;
+	font-weight: bold;
+	line-height: 27px;
+	padding: 0px 0 10px 0;
+	margin-bottom: 10px;
+}
+
+.footer-div ul li {
+	list-style-type: none;
+	line-height: 25px;
+}
+
+.footer-div ul .newsletter-box .btn {
+	border: medium none;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-o-border-radius: 3px;
+	-ms-border-radius: 3px;
+	border-radius: 3px;
+	display: inline-block;
+	height: 40px;
+	padding: 0;
+	width: 100%;
+	color: #fff;
+}
+
+.footer-div ul .newsletter-box h5 {
+	width: 100%;
+	border: 1px solid #BAC1C8;
+	padding: 7px;
+	background: #fff;
+}
+
+.footer-div .social {
+	margin-top: 20px;
+}
+
+.footer-div .social li {
+	background: none repeat scroll 0 0 #B5B5B5;
+	border: 2px solid #B5B5B5;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	-o-border-radius: 50%;
+	-ms-border-radius: 50%;
+	border-radius: 50%;
+	float: left;
+	height: 36px;
+	line-height: 36px;
+	margin: 0 8px 0 0;
+	padding: 0;
+	text-align: center;
+	width: 36px;
+	transition: all 0.5s ease 0s;
+	-moz-transition: all 0.5s ease 0s;
+	-webkit-transition: all 0.5s ease 0s;
+	-ms-transition: all 0.5s ease 0s;
+	-o-transition: all 0.5s ease 0s;
+}
+
+.footer-div .social li:hover {
+	border: 2px solid #2c3e50;
+	background: #2c3e50;
+	transform: scale(1.15) rotate(360deg);
+	-webkit-transform: scale(1.1) rotate(360deg);
+	-moz-transform: scale(1.1) rotate(360deg);
+	-ms-transform: scale(1.1) rotate(360deg);
+	-o-transform: scale(1.1) rotate(360deg);
+}
+
+.footer-div .social li:hover .fa {
+	color: #fff;
+}
+
+.footer-div .footer-bottom {
+	background: #E3E3E3;
+	border-top: 1px solid #DDDDDD;
+	padding: 10px 0;
+	margin: 20px -15px 0 -15px;
+}
+
+.footer-div .footer-bottom .payments {
+	width: 170px;
+	float: right;
+}
+
+.footer-div .footer-bottom .payments .fa {
+	font-size: 30px;
+}
+
+@media only screen and (max-width: 768px) {
+	.product-div .caption-div {
+		font-size: 32px;
+	}
+}
+
+/*# sourceMappingURL=style.css.map */
