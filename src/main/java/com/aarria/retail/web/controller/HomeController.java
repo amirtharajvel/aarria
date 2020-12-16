@@ -147,7 +147,6 @@ public class HomeController {
 		return modelAndView;
 	}
 
-
 	// It removes session attribute
 	@RequestMapping(value = "/removeAttribute", method = RequestMethod.GET)
 	public void removeSessionAttribute(HttpSession session, @RequestParam("attribute") String attribute) {
