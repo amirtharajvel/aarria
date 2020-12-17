@@ -2,6 +2,10 @@ version: '3'
 services:
   mysql-standalone:
     image: 'mysql:8.0'
+    volumes:
+      - db-data:/var/lib/mysql
+      - ./aarria.sql:/docker-entrypoint-initdb.d/dump.sql
+
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_PASSWORD=root
@@ -10,6 +14,8 @@ services:
       - 3307:3306
     networks:
       - backend
+    expose:
+      - '3306'
 
   springboot-docker-container:
     image: springboot-docker-container
@@ -32,4 +38,7 @@ services:
 networks:
   backend:
     driver: bridge
+
+volumes:
+  db-data:
 
