@@ -8,9 +8,9 @@ public class ProductsSuggestionDto {
 	private Long productId;
 	private String pid;
 	private String image;
-	private double price;
+	private Double price;
 	private String name;
-	private double actualPrice;
+	private Double actualPrice;
 
 	public ProductsSuggestionDto(Product product) {
 		super();
@@ -35,7 +35,7 @@ public class ProductsSuggestionDto {
 		return image;
 	}
 
-	public double getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
@@ -43,7 +43,7 @@ public class ProductsSuggestionDto {
 		return name;
 	}
 
-	public double getActualPrice() {
+	public Double getActualPrice() {
 		return actualPrice;
 	}
 

@@ -11,10 +11,10 @@ public class BankAccount {
 	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "bank_account_generator")
 	private Long id;
 
-	@Column
+	@Column(name = "accountNo")
 	private String accountNo;
 
-	@Column
+	@Column(name = "ifscCode")
 	private String ifscCode;
 
 	@ManyToOne

@@ -32,25 +32,25 @@ public class Address {
 	@Column
 	private String mobile;
 
-	@ManyToOne
+	@ManyToOne(targetEntity = User.class)
 	private User user;
 
 	@Column
 	private Integer country;
 
-	@Column
+	@Column(name="isDeliverHere")
 	private Boolean isDeliverHere;
 
 	@Column
 	private String email;
 
-	@Column
+	@Column(name="deliveryArea")
 	private String deliveryArea;
 	
 	@Column
 	private String coordinates;
 	
-	@Column
+	@Column(name = "addedDate")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date addedDate;
 
