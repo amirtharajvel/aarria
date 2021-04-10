@@ -231,3 +231,6 @@
 	</build>
 
 </project>
+
+<!-- mvn install:install-file -Dfile=src\\main\\resources\\jar\\ccavutil.jar -DgroupId=com.ccavenue.java -DartifactId=ccavenue-java -Dversion=2.0 -Dpackaging=jar -DgeneratePom=true
+ -->
