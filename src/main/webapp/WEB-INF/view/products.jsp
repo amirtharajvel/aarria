@@ -439,6 +439,7 @@
 													<span class="price">&#8377; ${product.price } </span>
 
 													<del>&#8377;${product.actualPrice}</del>
+
 													<%
 														if (session.getAttribute("isAdmin") != null) {
 																Boolean admin = (Boolean) session.getAttribute("isAdmin");
@@ -455,9 +456,11 @@
 													<%-- <span class="offer_price">(${product.discount}%OFF)</span> --%>
 												</div>
 											</div>
-											<div style="width: 100%; text-align: left; color: grey;"
+											<div style="width: 100%; text-align: left; color: #0F1111!important; font-weight: 400!important"
 												class="col-xs-5 col-sm-6 col-md-6 padding-0 text-right">
-												${product.shortName}</div>
+												${product.shortName}
+
+												</div>
 										</div>
 									</div>
 								</div>

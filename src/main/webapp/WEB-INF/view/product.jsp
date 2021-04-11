@@ -56,13 +56,13 @@ ul {
 	margin: 0;
 	font-size: 14px;
 	padding-top: 10px;
-	font-weight: bold;
+	font-weight: normal;
 	color: #333;
 }
 
 .content-slider h4 {
 	color: #B12704 !important;
-	font-size: 14px;
+	font-size: 18px;
 	padding-top: 3px;
 	font-weight: normal;
 	font-family:
@@ -86,6 +86,11 @@ ul {
 img:hover {
 	cursor: pointer;
 }
+
+.clone left h3 a {
+    font-color: #007185;
+}
+
 </style>
 
 
@@ -142,7 +147,7 @@ img:hover {
 				<div id="price_container">
 					<span id="price_value"><i class="fa fa-inr"></i>${product.price}</span>
 					<span
-						style="color: #111; font-weight: 700 !important; 13px!important">FREE
+						style="color: #111; font-weight: 700 !important; 13px!important">FREE 1 Day
 						Delivery</span>&nbsp;<span style="color: #555">M.R.P:</span> <span
 						id="actual_price"><i class="fa fa-inr"></i>${product.actualPrice}</span>&nbsp;&nbsp;
 					<br />
@@ -150,6 +155,13 @@ img:hover {
 						You save <span style="color: #B12D24; font-size: 14px;"><i
 							class="fa fa-inr"></i>${product.youSaveAmount}</span>
 						<span id="discount">(${product.discount}%)</span>
+						<c:if test="${product.isAtleastOneSizeHasStock eq true}">
+						    <span style="font-size: 18px; color: #007600!important; "> In stock. </span>
+						</c:if>
+
+						<c:if test="${product.isAtleastOneSizeHasStock eq false}">
+                        						    <span style="font-size: 18px; color: #B12D24!important; "> Out of stock. </span>
+                        						</c:if>
 					</c:if>
 				</div>
 				<input type="hidden" id="sizes_length"
@@ -165,10 +177,13 @@ img:hover {
 
 				<c:if test="${product.deliveryCharge != null}">
 					<div id="delivery_charge_container">
-						Get Additional &#8377;50 OFF - use code FALLS200 <br /> Buy Any 2
-						Get &#8377;200 OFF - use code FALLS200 <br /> Shop &#8377;2000
-						Get &#8377;500 OFF - use code BIGTREAT
+						FREE Try And Buy
+
 					</div>
+					<div id="return_container">
+                    						Easy Returns
+
+                    					</div>
 				</c:if>
 
 				<c:if
@@ -229,6 +244,29 @@ img:hover {
 						TO CART</button>
 				</div>
 				<div id="accordion" class="panel-group">
+
+
+                    <div class="panel panel-default">
+                    						<div class="panel-heading">
+                    							<h4 class="panel-title">
+                    								<a data-toggle="collapse" data-parent="#accordion"
+                    									href="#collapseOffers">Offers</a>
+                    							</h4>
+                    						</div>
+                    						<div id="collapseOffers" class="panel-collapse collapse">
+                    							<div class="panel-body">
+
+                    								<table class="table table-sm">
+                                                    Get Additional <span style="font-size: 21px;color: #449d44"><strong> FLAT &#8377;50 OFF </strong> </span>- Use code <strong>FALLS200 </strong><hr/>Buy Any 2
+                                                    						Get <span style="font-size: 21px; color: #449d44"><strong> FLAT &#8377;200 OFF </strong> </span> - Use code <strong>FALLS200 </strong><hr/> Shop &#8377;2000
+                                                    						Get  <span style="font-size: 21px; color: #449d44"><strong>FLAT &#8377;500 OFF </strong> </span> - Use code <strong>BIGTREAT</strong>
+
+
+                    								</table>
+                    							</div>
+                    						</div>
+                    					</div>
+
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h4 class="panel-title">
@@ -255,7 +293,7 @@ img:hover {
 										<div style="float: left; margin-left: 10px; color: #111">
 											<!-- <button type="button" class="btn btn-success" value="search"
 												onclick="pincodeCheck()">Check</button> -->
-											FREE Delivery in Bengaluru - within 24 hours
+											FREE 1 day Delivery in Bengaluru
 										</div>
 									</li>
 								</div>
@@ -272,6 +310,32 @@ img:hover {
 							</div>
 						</div>
 					</div>
+
+                    <div class="panel panel-default">
+                    						<div class="panel-heading">
+                    							<h4 class="panel-title">
+                    								<a data-toggle="collapse" data-parent="#accordion"
+                    									href="#collapseThree">Shipping and Returns</a>
+                    							</h4>
+                    						</div>
+                    						<div id="collapseThree" class="panel-collapse collapse">
+                    							<div class="panel-body">
+                    								<table class="table">
+                    									<c:if
+                    										test="${fn:length(product.shippingAndReturnsDescriptions) > 0}">
+                    										<c:forEach var="attribute"
+                    											items="${product.shippingAndReturnsDescriptions}">
+                    											<tr>
+                    												<td>${attribute.key }</td>
+                    												<td><div class="description_value">${attribute.value }</div></td>
+                    											</tr>
+                    										</c:forEach>
+                    									</c:if>
+                    								</table>
+                    							</div>
+                    						</div>
+                    					</div>
+
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h4 class="panel-title">
@@ -307,30 +371,7 @@ img:hover {
 							</div>
 						</div>
 					</div>
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h4 class="panel-title">
-								<a data-toggle="collapse" data-parent="#accordion"
-									href="#collapseThree">Shipping and Returns</a>
-							</h4>
-						</div>
-						<div id="collapseThree" class="panel-collapse collapse">
-							<div class="panel-body">
-								<table class="table">
-									<c:if
-										test="${fn:length(product.shippingAndReturnsDescriptions) > 0}">
-										<c:forEach var="attribute"
-											items="${product.shippingAndReturnsDescriptions}">
-											<tr>
-												<td>${attribute.key }</td>
-												<td><div class="description_value">${attribute.value }</div></td>
-											</tr>
-										</c:forEach>
-									</c:if>
-								</table>
-							</div>
-						</div>
-					</div>
+
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h4 class="panel-title">

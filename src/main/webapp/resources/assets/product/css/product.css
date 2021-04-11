@@ -5244,7 +5244,8 @@ textarea.input-group-sm>.input-group-btn>.btn {
 
 .navbar-default .navbar-nav>li>a,
 .navbar-default .navbar-text {
-    color: #777
+    color: #333;
+    font-weight: bold;
 }
 
 .navbar-default .navbar-nav>li>a:focus,
@@ -11829,6 +11830,7 @@ body {
 #delivery_charge_container,
 #offer_container,
 #price_container
+#return_container
  {
     border-top: 1px solid #e5e0e0;
     padding-top: 3%;
@@ -11924,6 +11926,15 @@ a:focus {
 }
 
 #delivery_charge_container {
+    border-bottom: 1px solid #e5e0e0;
+    margin-top: 3%;
+    padding-bottom: 3%;
+    width: 100%;
+    color: #111;
+    font-weight: lighter
+}
+
+#return_container {
     border-bottom: 1px solid #e5e0e0;
     margin-top: 3%;
     padding-bottom: 3%;

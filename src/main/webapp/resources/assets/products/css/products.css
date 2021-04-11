@@ -5269,7 +5269,8 @@ textarea.input-group-sm>.input-group-btn>.btn {
 
 .navbar-default .navbar-nav>li>a,
 .navbar-default .navbar-text {
-    color: #777
+    color: #333;
+    font-weight: bold;
 }
 
 .navbar-default .navbar-nav>li>a:focus,
@@ -7777,7 +7778,7 @@ ol,
 p,
 span,
 ul {
-    color: #323A3D;
+    color: #565959;
     margin: 0;
     padding: 0
 }
@@ -8012,12 +8013,14 @@ slider .carousel .carousel-control {
 
 .products-div .pro-list .pro-box .pro-bottom {
     background: #EDEFF1;
-    height: 60px;
+    height: 65px;
     padding: 12px 10px
 }
 
 .products-div .pro-list .pro-box .pro-bottom .price_info .price {
-    font-weight: 700
+    font-weight: 700;
+    color: #B12704;
+    font-size: 20px;
 }
 
 .products-div .pro-list .pro-box .pro-bottom .price_info .actual_price {
