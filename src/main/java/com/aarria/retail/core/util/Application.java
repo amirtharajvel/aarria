@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class Application {
 
-	public static final String IMAGES_DOMAIN = "http://localhost:80/resources/";
+	public static final String IMAGES_DOMAIN = "/resources/assets/images/resources/";
 
 	public static final String SEPARATOR = "/";
 
