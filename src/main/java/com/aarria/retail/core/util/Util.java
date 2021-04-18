@@ -8,7 +8,6 @@ import com.aarria.retail.web.dto.response.AddressDto;
 import com.aarria.retail.web.dto.response.BreadcrumbDto;
 import com.aarria.retail.web.dto.response.CategoryDto;
 import com.aarria.retail.web.dto.response.ProductDetailsImageDto;
-import com.aarria.retail.web.dto.response.geocode.GeoCode;
 import com.lambdaworks.crypto.SCryptUtil;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.io.FilenameUtils;
@@ -858,8 +857,5 @@ public class Util {
 		}
 	}
 
-	public static GeoCode getAddressFromLatLang(String latLang) {
-		return restTemplate.getForObject(Application.FIND_ADDRESS_FROM_LAT_LANG + latLang, GeoCode.class);
-	}
 
 }

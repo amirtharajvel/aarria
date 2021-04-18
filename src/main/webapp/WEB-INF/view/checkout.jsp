@@ -160,96 +160,6 @@
 		margin-bottom: 15px;
 	}
 }
-
-#address_form_panel {
-	display: hidden;
-}
-
-/**
-Start Maps **/
-/* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-#map {
-	height: 100%;
-}
-/* Optional: Makes the sample page fill the window. */
-html, body {
-	height: 100%;
-	margin: 0;
-	padding: 0;
-}
-
-#description {
-	font-family: Roboto;
-	font-size: 15px;
-	font-weight: 300;
-}
-
-#infowindow-content .title {
-	font-weight: bold;
-}
-
-#infowindow-content {
-	display: none;
-}
-
-#map #infowindow-content {
-	display: inline;
-}
-
-.pac-card {
-	margin: 10px 10px 0 0;
-	border-radius: 2px 0 0 2px;
-	box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	outline: none;
-	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-	background-color: #fff;
-	font-family: Roboto;
-}
-
-#pac-container {
-	padding-bottom: 12px;
-	margin-right: 12px;
-}
-
-.pac-controls {
-	display: inline-block;
-	padding: 5px 11px;
-}
-
-.pac-controls label {
-	font-family: Roboto;
-	font-size: 13px;
-	font-weight: 300;
-}
-
-#pac-input {
-	background-color: #fff;
-	font-family: Roboto;
-	font-size: 15px;
-	font-weight: 300;
-	margin-left: 12px;
-	padding: 0 11px 0 13px;
-	text-overflow: ellipsis;
-	width: 400px;
-	line-height: 25px;
-}
-
-#pac-input:focus {
-	border-color: #4d90fe;
-}
-
-#title {
-	color: #fff;
-	background-color: #4d90fe;
-	font-size: 25px;
-	font-weight: 500;
-	padding: 6px 12px;
-}
-/**
-End Maps
-**/
 </style>
 </head>
 
@@ -410,8 +320,8 @@ End Maps
 																			<td><form
 																					action="/cart/reduceOneQuantityFromCart"
 																					method="post">
-																					<input type="submit" class="btn-success"
-																						value=" - " style="margin-right: 10px;" /> <input
+																					<input type="submit" value="-"
+																						style="margin-right: 10px;" /> <input
 																						type="hidden" name="pid" value="${product.pid}" />
 																					<input type="hidden" name="size"
 																						value="${product.size}" />
@@ -420,8 +330,8 @@ End Maps
 																			<td><form
 																					action="/cart/increaseOneQuantityToCart"
 																					method="post">
-																					<input type="submit" class="btn-success"
-																						value=" + " style="margin-left: 10px;" /> <input
+																					<input type="submit" value="+"
+																						style="margin-left: 10px;" /> <input
 																						type="hidden" name="pid" value="${product.pid}" />
 																					<input type="hidden" name="size"
 																						value="${product.size}" />
@@ -468,12 +378,12 @@ End Maps
 																</c:if> <c:if
 																	test="${couponCodeAppliedMessage == null or couponCodeAppliedMessage.contains('Invalid Coupon')}">
 																	 ${totalBeforeOffer}
-																	 
+
 																</c:if> <c:if
 																	test="${couponCodeAppliedMessage != null and couponCodeAppliedMessage.contains('Please purchase above')}">
-																	 
+
 																	${totalBeforeOffer}
-																	 
+
 																</c:if>
 
 														</b></td>
@@ -758,7 +668,7 @@ End Maps
 
 	<script src="resources/assets/common/js/jquery-2.1.4.min.js"></script>
 	<script src="resources/assets/common/js/bootstrap.min.js"></script>
-	<!-- <script src="resources/assets/checkout/js/jquery.bootstrap.wizard.js"></script> -->
+	<script src="resources/assets/checkout/js/jquery.bootstrap.wizard.js"></script>
 	<script src="resources/assets/checkout/js/checkout.js"></script>
 	<c:if test="${addresses.equals('nil')}">
 		<script>
@@ -821,132 +731,105 @@ End Maps
 			<div class="modal-content">
 				<div class="modal-body">
 
-					<div class="panel panel-default" id="address_form_panel">
-						<div class="panel-body">
-							<div id="address_fields" style="display: hidden;">
-								<div id="manual_address_entry">
-									<div class="row">
-										<div class="col-xs-12 col-sm-8 col-md-8 right-border">
-											<form class="form-horizontal" id="add_address_form"
-												method="POST" action="addAddress">
-												<input type="hidden" name="id" id="hidden_current_id" />
-
-												<div class="form-group">
-													<label class="control-label col-sm-4 col-md-3" for="">Delivery
-														Area</label>
-													<div class="col-sm-8 col-md-9">
-														<div class="input-group">
-															<span class="input-group-addon" style="cursor: pointer;"
-																onclick="detectlocation();"> <img height="20"
-																width="20" id="loading_location"
-																src="resources/assets/checkout/images/loading7_green.gif" />
-																<img height="20" width="20" id="shoot_location"
-																src="resources/assets/checkout/images/detect.png" /></span> <input
-																minlength="15" id="deliveryArea-text"
-																placeholder="Click to detect location"
-																class="form-control custom-control"
-																style="border-radius: 0px 4px 4px 0px;" rows="3"
-																style="resize: none" required>
-
-															<textarea
-																style="display: none; border-radius: 0px 4px 4px 0px;"
-																minlength="20" name="deliveryArea" id="deliveryArea"
-																required="required" class="form-control custom-control"
-																rows="3"></textarea>
-														</div>
-													</div>
-												</div>
-
-												<div class="form-group">
-													<label class="control-label col-sm-4 col-md-3" for="">Full
-														Address</label>
-													<div class="col-sm-8 col-md-9">
-														<input type="" class="form-control" name="address"
-															id="address" title="Please enter your full address"
-															required>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="control-label col-sm-4 col-md-3" for="">Name</label>
-													<div class="col-sm-8 col-md-9">
-														<input class="form-control" name="name" id="name" required>
-													</div>
-												</div>
-
-												<!-- <div class="form-group">
-													<label class="control-label col-sm-4 col-md-3" for="">Landmark:</label>
-													<div class="col-sm-8 col-md-9">
-														<input class="form-control" type="text" name="landmark"
-															id="landmark" placeholder="(Optional)">
-													</div>
-												</div> -->
-												<!-- <div class="form-group">
-													<label class="control-label col-sm-4 col-md-3" for="">Email:</label>
-													<div class="col-sm-8 col-md-9">
-														<input class="form-control" type="email" name="email"
-															id="email" required>
-													</div>
-												</div> -->
-												<div class="form-group">
-													<label class="control-label col-sm-4 col-md-3" for="">Mobile</label>
-													<div class="col-sm-8 col-md-9">
-														<div class="input-group">
-															<span class="input-group-addon">+91</span> <input
-																id="mobile_textbox" name="mobile" type="text"
-																style="border-radius: 0px 4px 4px 0px;"
-																class="form-control" maxlength="10"
-																placeholder="Who will receive the order?"
-																title="Please enter a mobile number" pattern=".{10,10}"
-																oninput="this.value=this.value.replace(/[^0-9]/g,'');">
-														</div>
-													</div>
-												</div>
-
-
-												<div class="form-group">
-													<div class="col-sm-offset-3 col-sm-9">
-														<button type="submit" id="add_address_submit"
-															class="btn btn-success">Add Address</button>
-													</div>
-												</div>
-											</form>
+					<div id="manual_address_entry" style="display: hidden;">
+						<div class="row">
+							<div class="col-xs-12 col-sm-8 col-md-8 right-border">
+								<form class="form-horizontal" id="add_address_form"
+									method="POST" action="addAddress">
+									<input type="hidden" name="id" id="hidden_current_id" />
+									<div class="form-group">
+										<label class="control-label col-sm-4 col-md-3" for="">Pincode:</label>
+										<div class="col-sm-8 col-md-9">
+											<input type="" class="form-control" name="pincode"
+												id="pincode" pattern=".{6,6}" maxlength="6"
+												oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+												title="Indian pincode is exactly 6 digits" required>
 										</div>
-										<div class="col-xs-12 col-sm-4 col-md-4">
+									</div>
+									<div class="form-group">
+										<label class="control-label col-sm-4 col-md-3" for="">Name:</label>
+										<div class="col-sm-8 col-md-9">
+											<input class="form-control" name="name" id="name" required>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="control-label col-sm-4 col-md-3" for="">Address:</label>
+										<div class="col-sm-8 col-md-9">
+											<input class="form-control" minlength="10" name="address"
+												id="address" required>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="control-label col-sm-4 col-md-3" for="">Landmark:</label>
+										<div class="col-sm-8 col-md-9">
+											<input class="form-control" type="text" name="landmark"
+												id="landmark" placeholder="(Optional)">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="control-label col-sm-4 col-md-3" for="">Email:</label>
+										<div class="col-sm-8 col-md-9">
+											<input class="form-control" type="email" name="email"
+												id="email" required>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="control-label col-sm-4 col-md-3" for="">Mobile:</label>
+										<div class="col-sm-8 col-md-9">
+											<div class="input-group">
+												<span class="input-group-addon">+91</span> <input
+													id="mobile_textbox" name="mobile" type="text"
+													style="border-radius: 0px 4px 4px 0px;"
+													class="form-control" maxlength="10"
+													placeholder="Who will receive the order?"
+													title="Please enter a mobile number" pattern=".{10,10}"
+													oninput="this.value=this.value.replace(/[^0-9]/g,'');">
+											</div>
+										</div>
+									</div>
 
-											<c:if test="${!addresses.equals('nil') }">
-												<c:forEach var="address" items="${addresses }">
 
-													<div class="order-details">
-														<p class="name_div_ind" style="font-weight: bold;">${address.name }</p>
-														<p class="address_div_ind">${address.address }</p>
-														<p class="landmark_div_ind">${address.landmark }</p>
-														<p class="country_div_ind">${address.country }</p>
-														<p class="pincode_div_ind">${address.pincode }</p>
-														<p class="mobile_div_ind">${address.mobile }</p>
-														<p class="email_div_ind">${address.email }</p>
-														<input type="hidden" class="delivery_area_div_ind"
-															value="${address.deliveryArea}" />
-														<p>
-															<%-- <img onclick="deleteAddress(${address.id})"
+									<div class="form-group">
+										<div class="col-sm-offset-3 col-sm-9">
+											<button type="submit" id="add_address_submit"
+												class="btn btn-success">Add Address</button>
+										</div>
+									</div>
+								</form>
+							</div>
+							<div class="col-xs-12 col-sm-4 col-md-4">
+
+								<c:if test="${!addresses.equals('nil') }">
+									<c:forEach var="address" items="${addresses }">
+
+										<div class="order-details">
+											<p class="name_div_ind" style="font-weight: bold;">${address.name }</p>
+											<p class="address_div_ind">${address.address }</p>
+											<p class="landmark_div_ind">${address.landmark }</p>
+											<p class="country_div_ind">${address.country }</p>
+											<p class="pincode_div_ind">${address.pincode }</p>
+											<p class="mobile_div_ind">${address.mobile }</p>
+											<p class="email_div_ind">${address.email }</p>
+
+											<p>
+												<%-- <img onclick="deleteAddress(${address.id})"
 												class="delete_address"
 												src="resources/assets/checkout/images/delete.png"
 												height="17" width="17" />  --%>
-															<img class="edit_address"
-																src="resources/assets/checkout/images/editsvg.png"
-																height="21" width="21" /> <input type="hidden"
-																class="edit_current_id" name="id" value="${address.id}" />&nbsp;
-															<a onclick='deliverHere(${address.id})'>Deliver Here</a>
-														</p>
-													</div>
-													<hr>
-												</c:forEach>
-											</c:if>
+												<img class="edit_address"
+													src="resources/assets/checkout/images/editsvg.png"
+													height="21" width="21" /> <input type="hidden"
+													class="edit_current_id" name="id" value="${address.id}" />&nbsp;
+												<a onclick='deliverHere(${address.id})'>Deliver Here</a>
+											</p>
 										</div>
-									</div>
-								</div>
+										<hr>
+									</c:forEach>
+								</c:if>
 							</div>
 						</div>
 					</div>
+
 				</div>
 			</div>
 		</div>
@@ -954,65 +837,46 @@ End Maps
 
 
 
-	<!-- <!--  Start Maps -->
-	-->
-	<div id="map" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-
-			<!-- Modal content-->
+	<div class="modal fade" tabindex="-1" role="dialog"
+		aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
+		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Confirm Order</h4>
+				</div>
 				<div class="modal-body">
-
-					<div class="panel panel-default" id="address_form_panel">
-						<div class="panel-body">Hello</div>
-					</div>
+					<p>Confirm order and Proceed</p>
+				</div>
+				<div class="modal-footer">
+					<form action="/placeOrder" id="pay_request_form">
+						<input type="hidden" name="paymentMode" id="payment_mode" />
+						<button type="button" onclick="closeConfirm()"
+							id="cancel_order_button" class="btn btn-success add_to_cart">Close</button>
+						<button type="submit" onclick="placeOrder()"
+							id="confirm_place_order_button"
+							class="btn btn-success add_to_cart">Place Order</button>
+					</form>
 				</div>
 			</div>
 		</div>
-		<!--  End Maps -->
-
-		<div class="modal fade" tabindex="-1" role="dialog"
-			aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
-			<div class="modal-dialog modal-sm">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-						<h4 class="modal-title" id="myModalLabel">Confirm Order</h4>
-					</div>
-					<div class="modal-body">
-						<p>Confirm order and Proceed</p>
-					</div>
-					<div class="modal-footer">
-						<form action="/placeOrder" id="pay_request_form">
-							<input type="hidden" name="paymentMode" id="payment_mode" />
-							<button type="button" onclick="closeConfirm()"
-								id="cancel_order_button" class="btn btn-success add_to_cart">Close</button>
-							<button type="submit" onclick="placeOrder()"
-								id="confirm_place_order_button"
-								class="btn btn-success add_to_cart">Place Order</button>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-		<form accept-charset=utf-8 action="deliverHere" class="deliverHere">
-			<input type="hidden" id="current_id" name="id" />
-		</form>
-		<!-- Global site tag (gtag.js) - Google Analytics -->
-		<!-- Global site tag (gtag.js) - Google Analytics -->
-		<script async
-			src="https://www.googletagmanager.com/gtag/js?id=UA-114298247-2"></script>
-		<script>
+	</div>
+	<form accept-charset=utf-8 action="deliverHere" class="deliverHere">
+		<input type="hidden" id="current_id" name="id" />
+	</form>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async
+		src="https://www.googletagmanager.com/gtag/js?id=UA-114298247-2"></script>
+	<script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
   gtag('config', 'UA-114298247-2');
 </script>
-		<input type="hidden" id="lat_of_user" /> <input type="hidden"
-			id="lang_of_user" />
 </body>
 </html>

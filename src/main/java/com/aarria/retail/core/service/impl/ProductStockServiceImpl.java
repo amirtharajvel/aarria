@@ -31,6 +31,7 @@ public class ProductStockServiceImpl implements ProductStockService {
 		productStockRepository.deleteAll(stocks);
 	}
 
+	@Transactional
 	@Override
 	public ProductStock findStockByProductAndSize(Product product, String size) {
 		return productStockRepository.findByProductAndSize(product, size);

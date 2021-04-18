@@ -185,12 +185,12 @@ public class AdminOrderServiceImpl implements AdminOrderService {
 		}
 
 		if (order.getStatus().equals(OrderStatus.DELIVERED.ordinal())) {
-			messageService.sendSms("Delivered: Your order for " + Util.messageTemplate(order, Constants.DELIVERED),
+			messageService.sendSms("Order Delivered: Your order for " + Util.messageTemplate(order, Constants.DELIVERED),
 					user.getMobile());
 		}
 
 		if (order.getStatus().equals(OrderStatus.DISPATCHED.ordinal())) {
-			messageService.sendSms("Dispatched: Your order for " + Util.messageTemplate(order, Constants.DISPATCHED),
+			messageService.sendSms("Order Dispatched: Your order for " + Util.messageTemplate(order, Constants.DISPATCHED),
 					user.getMobile());
 		}
 

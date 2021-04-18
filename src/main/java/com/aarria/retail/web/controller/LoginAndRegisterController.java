@@ -65,8 +65,6 @@ public class LoginAndRegisterController {
 	@Autowired
 	private MessageService messageService;
 
-	private Map<Long, Integer> globalMap = new HashMap<>();
-
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ModelAndView join(@ModelAttribute("form") @Valid RegisterInputDto dto, HttpSession session) {
 
@@ -93,7 +91,7 @@ public class LoginAndRegisterController {
 
 			LOGGER.info("OTP code while registering using register page " + code + " for mobile " + user.getMobile());
 
-			globalMap.put(Long.valueOf(dto.getMobile()), code);
+			session.setAttribute(dto.getMobile(), code);
 
 			return view;
 
@@ -429,7 +427,7 @@ public class LoginAndRegisterController {
 
 		LOGGER.info("OTP code on forgot password from login page " + code + " for mobile " + mobile);
 
-		globalMap.put(Long.valueOf(mobile), code);
+		session.setAttribute(mobile, code);
 
 		return view;
 

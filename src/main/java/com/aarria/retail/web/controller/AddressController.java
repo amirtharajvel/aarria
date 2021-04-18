@@ -109,17 +109,4 @@ public class AddressController {
 		return view;
 	}
 
-	@RequestMapping(value = "/getAddressFromLatLang/{latLang:.+}", method = RequestMethod.GET)
-	public @ResponseBody LatLongResponseDto getAddressFromLatLang(HttpSession session,
-			@PathVariable("latLang") String latLang) {
-		// TODO check for fraud requests
-
-		User user = validationService.findUserFromSession(session);
-
-		if (user == null) {
-			return null;
-		}
-
-		return addressService.getAddressFromLatLang(latLang, user);
-	}
 }

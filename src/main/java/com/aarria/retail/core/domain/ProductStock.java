@@ -1,14 +1,6 @@
 package com.aarria.retail.core.domain;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.TableGenerator;
+import javax.persistence.*;
 
 import com.aarria.retail.web.dto.request.SizewiseStockDto;
 
@@ -32,6 +24,9 @@ public class ProductStock {
 
 	@Column(name = "original_stock")
 	private Integer originalStock;
+
+	@Transient
+	private Integer newStock;
 
 	public ProductStock() {
 		super();
@@ -89,4 +84,11 @@ public class ProductStock {
 		return "ProductStock [id=" + id + ", size=" + size + ", stock=" + stock + "]";
 	}
 
+	public void setNewStock(Integer newStock) {
+		this.newStock = newStock;
+	}
+
+	public Integer getNewStock() {
+		return newStock;
+	}
 }

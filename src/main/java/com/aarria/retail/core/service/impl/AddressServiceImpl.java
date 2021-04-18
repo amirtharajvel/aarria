@@ -3,19 +3,12 @@ package com.aarria.retail.core.service.impl;
 import com.aarria.retail.core.domain.Address;
 import com.aarria.retail.core.domain.User;
 import com.aarria.retail.core.service.AddressService;
-import com.aarria.retail.core.util.Util;
 import com.aarria.retail.persistence.repository.AddressRepository;
-import com.aarria.retail.web.dto.response.AddressDto;
-import com.aarria.retail.web.dto.response.LatLongResponseDto;
-import com.aarria.retail.web.dto.response.geocode.AddressComponent;
-import com.aarria.retail.web.dto.response.geocode.GeoCode;
-import com.aarria.retail.web.dto.response.geocode.Result;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import java.sql.Timestamp;
 import java.time.Instant;
@@ -99,71 +92,5 @@ public class AddressServiceImpl implements AddressService {
             currentAddress.setIsDeliverHere(true);
             saveAddress(currentAddress);
         }
-    }
-
-    @Override
-    public LatLongResponseDto getAddressFromLatLang(String latLang, User user) {
-
-        GeoCode code = Util.getAddressFromLatLang(latLang);
-        if (code != null) {
-            AddressDto dto = createDtoFromAddressFromGoogle(code);
-            if (dto != null) {
-
-                // while detecting location by default set the user mobile itself
-                return new LatLongResponseDto(dto.getDeliveryArea(), user.getMobile());
-            }
-        }
-
-        return null;
-    }
-
-    private AddressDto createDtoFromAddressFromGoogle(GeoCode a) {
-
-        AddressDto dto = null;
-        try {
-            if (a == null) {
-                return null;
-            }
-
-            if (CollectionUtils.isNotEmpty(a.getResults())) {
-
-                dto = new AddressDto();
-
-                for (Result result : a.getResults()) {
-
-                    List<AddressComponent> components = result.getAddressComponents();
-
-                    if (CollectionUtils.isNotEmpty(components)) {
-
-                        for (AddressComponent component : components) {
-
-                            if (CollectionUtils.isNotEmpty(component.getTypes())) {
-                                for (String type : component.getTypes()) {
-                                    if (StringUtils.isEmpty(dto.getPincode()) && "postal_code".equalsIgnoreCase(type)) {
-                                        try {
-                                            dto.setPincode(Integer.valueOf(component.getLongName()));
-                                        } catch (Exception e) {
-                                            LOGGER.error("Unable to convert pincode to string " + e);
-                                        }
-                                    }
-
-                                }
-                            }
-                        }
-                    }
-
-                    if (StringUtils.isEmpty(dto.getDeliveryArea())) {
-                        dto.setDeliveryArea(result.getFormattedAddress());
-                    } else if (dto.getDeliveryArea() != null && result.getFormattedAddress() != null
-                            && (dto.getDeliveryArea().length() < result.getFormattedAddress().length())) {
-                        dto.setDeliveryArea(result.getFormattedAddress());
-                    }
-                }
-            }
-        } catch (Exception e) {
-            LOGGER.error("Unable to fetch coordinates " + e);
-        }
-
-        return dto;
     }
 }

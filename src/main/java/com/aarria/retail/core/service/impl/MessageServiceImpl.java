@@ -95,6 +95,9 @@ public class MessageServiceImpl implements MessageService {
 			return;
 		}
 
+		LOGGER.info("Message is " + message);
+		System.out.println("Message is " + message);
+
 		new Thread(() -> {
 			final String uri = getPromotionalSMSURI(mobile, message);
 			String result = restTemplate.getForObject(uri, String.class);
@@ -233,7 +236,7 @@ public class MessageServiceImpl implements MessageService {
 				"Return order placed");
 		sendSms("Return order request is placed for the order " + order.getOrderId() + " for the amount "
 				+ Util.getTotalOrderAmount(order)
-				+ ". We're checking for the pick up courier service. We'll update you the status shortly.",
+				+ ". We'll contact you shortly.",
 				user.getMobile());
 
 	}

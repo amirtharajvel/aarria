@@ -269,9 +269,9 @@ public class OrderServiceImpl implements OrderService {
 
 			if (newStock == 0) {
 				// stockIterator.remove(); //DO NOT remove make stock as 0
-				productStock.setStock(0);
+				productStock.setNewStock(0);
 			} else {
-				productStock.setStock(newStock);
+				productStock.setNewStock(newStock);
 			}
 
 			cart.setProduct(product);
@@ -365,6 +365,8 @@ public class OrderServiceImpl implements OrderService {
 				if (stock.getStock() < item.getQuantity()) {
 					return null;
 				}
+
+				stock.setStock(stock.getNewStock());
 			}
 		}
 
@@ -916,10 +918,10 @@ public class OrderServiceImpl implements OrderService {
 
 	private void reportProductUnavailability(PrepareOrderResultDto result) {
 		messageService.sendEmailAndSmsToAdmin(
-				"It seems not all products has the required stock to continue. Please re-verify the products with the updated stock and place the order once again.",
+				"It seems not all products has the required stock to continue. It might be sold out while you place order. Please re-verify the products with the updated stock and place the order once again.",
 				"Order is null");
 		result.setMessage(
-				"It seems not all products has the required stock to continue. Please re-verify the products with the updated stock and place the order once again.");
+				"It seems not all products has the required stock to continue. It might be sold out while you place order. Please re-verify the products with the updated stock and place the order once again.");
 		result.setReason(PlaceOrderFailReason.PRODUCT_COUNT_MISMATCH.name());
 	}
 

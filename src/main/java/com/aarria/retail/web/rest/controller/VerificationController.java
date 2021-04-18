@@ -41,8 +41,6 @@ public class VerificationController {
 	@Autowired
 	private MessageService messageService;
 
-	private Map<Long, Integer> globalMap = new HashMap<>();
-
 	@RequestMapping("/sendEmail")
 	public @ResponseBody String sendEmail(HttpSession session, @RequestParam("email") String email) {
 
@@ -100,9 +98,9 @@ public class VerificationController {
 	@RequestMapping("/verifyMobile")
 	public @ResponseBody String verifyMobile(HttpSession session, @RequestParam("mobile") String mobile, String code) {
 
-		Integer codeInApplication = globalMap.get(Long.valueOf(mobile));
+		String codeInApplication = String.valueOf(session.getAttribute(mobile));
 
-		globalMap.remove(Long.valueOf(mobile));
+		session.removeAttribute(mobile);
 		
 		if (code == null || codeInApplication == null) {
 			if (session != null) {
@@ -150,9 +148,9 @@ public class VerificationController {
 	public @ResponseBody String verifyMobileOnForgotPassword(HttpSession session, @RequestParam("mobile") String mobile,
 			String code) {
 
-		Integer codeInApplication = globalMap.get(Long.valueOf(mobile));
+		String codeInApplication = String.valueOf(session.getAttribute(mobile));
 
-		globalMap.remove(Long.valueOf(mobile));
+		session.removeAttribute(mobile);
 		
 		if (code == null || codeInApplication == null) {
 			if (session != null) {

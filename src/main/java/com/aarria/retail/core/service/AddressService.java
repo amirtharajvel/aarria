@@ -23,5 +23,4 @@ public interface AddressService {
 	
 	void delete(Long id, User user);
 
-	public LatLongResponseDto getAddressFromLatLang(String latLang, User user);
 }

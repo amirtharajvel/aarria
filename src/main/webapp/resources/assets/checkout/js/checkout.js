@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
 	enableaddAddress();
 	disabletab();
 	focusmobile();
@@ -14,74 +13,7 @@ $(document).ready(function() {
 	disablesubmitbuttons();
 	onplaceorder();
 
-	$("#loading_location").hide();
-
 });
-
-function detectlocation() {
-
-	$("#deliveryArea-text").val("Please click allow to get your address");
-	getLocation();
-}
-
-function getLocation() {
-
-	console.log("Get location..");
-
-	navigator.geolocation.getCurrentPosition(function(position) {
-		// Get the coordinates of the current position.
-		var lat = position.coords.latitude;
-		var lng = position.coords.longitude;
-		console.log("langtitude is  " + lat + " and longtitude is " + lng
-				+ " in getCurrentPosition");
-
-		$("#deliveryArea-text").val("Retrieving your location..");
-		$("#loading_location").show();
-		$("#shoot_location").hide();
-
-		//getaddressfromlatlang(lat + "," + lng);
-	});
-
-	navigator.geolocation.watchPosition(function(position) {
-
-		var lat = position.coords.latitude;
-		var lng = position.coords.longitude;
-		console.log("langtitude is  " + lat + " and longtitude is " + lng
-				+ " in watch position");
-
-		console.log("i'm tracking you! in watchPosition");
-	}, function(error) {
-		if (error.code == error.PERMISSION_DENIED)
-			$("#deliveryArea").attr("required", false);
-		console.log("you denied me :-(");
-		$("#deliveryArea-text").val("");
-		$("#loading_location").hide();
-		$("#shoot_location").show();
-
-	});
-}
-
-function getaddressfromlatlang(latlng) {
-	$.ajax({
-		url : "/getAddressFromLatLang/" + latlng,
-		method : 'GET',
-		contentType : "application/json; charset=utf-8",
-		success : function(data) {
-			if (data === "null") {
-
-			} else {
-				$("#deliveryArea-text").hide();
-				$("#deliveryArea").val(data.deliveryArea);
-				$("#mobile_textbox").val(data.mobile);
-
-				$("#deliveryArea").show();
-
-				$("#shoot_location").show();
-				$("#loading_location").hide();
-			}
-		}
-	});
-}
 
 function onplaceorder() {
 	$("#confirm_place_order_button").html('Place Order');
@@ -138,14 +70,11 @@ function showdialog() {
 
 	$("#add_address_button").click(function(e) {
 		$("#checkout").modal('show');
-
 	});
 
 	$("#change_address").click(function(e) {
 		$("#checkout").modal('show');
-
 	});
-
 }
 
 function deliverHere(id) {
@@ -212,18 +141,14 @@ function editaddress() {
 		var name = parentDiv.find('.name_div_ind').html();
 		var id = parentDiv.find('.edit_current_id').val();
 		var email = parentDiv.find('.email_div_ind').html();
-		var deliveryarea = parentDiv.find('.delivery_area_div_ind').val();
 
 		$("#address").val(address);
 		$("#mobile_textbox").val(mobile);
 		$("#landmark").val(landmark);
+		$("#pincode").val(pincode);
 		$("#name").val(name);
 		$("#hidden_current_id").val(id);
 		$("#email").val(email);
-		$("#pincode").val(pincode);
-
-		$("#deliveryArea-text").val(deliveryarea);
-		$("#deliveryArea").val(deliveryarea);
 
 		$('#add_address_form').attr('action', '/updateAddress');
 
@@ -242,8 +167,6 @@ function showedit() {
 }
 
 function placeOrder() {
-
-	getLocation();
 
 	var addressNotEntered = $("#is_address_not_entered").val();
 
