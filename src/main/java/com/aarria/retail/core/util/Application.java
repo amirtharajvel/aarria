@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class Application {
 
-	public static final String IMAGES_DOMAIN = "http://103.86.176.50/resources/";
+	public static final String IMAGES_DOMAIN = "https://aarriacdn.online/resources/";
 
 	public static final String SEPARATOR = "/";
 
