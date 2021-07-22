@@ -74,6 +74,38 @@ public class Enum {
 		}
 	}
 
+	public enum OrderStatusToFlowIdMapper {
+		OTP("60f99db51d2e025d4a5a2c89"),
+		SINGLE_ORDER_CONFIRMED("60efa52810c60c16bb0a5575"),
+		MULTIPLE_ORDER_CONFIRMED("60f7132bb7ecc722cc410929"),
+		SINGLE_ORDER_CANCELLED("60f71448b7ecc722cc41092c"),
+		MULTIPLE_ORDER_CANCELLED("60f712c19cac38232b0cd5a6"),
+		SINGLE_ORDER_DISPATCHED("60f7152ffa6a9f0b1471bd72"),
+		MULTIPLE_ORDER_DISPATCHED("60f713828e6a8466d2521266"),
+		SINGLE_ORDER_DELIVERED("60f713dd8e6a8466d2521267"),
+		MULTIPLE_ORDER_DELIVERED("60f714d390d4cc111948bf79");
+
+		private String s;
+		OrderStatusToFlowIdMapper(String s) {
+			this.s = s;
+		}
+
+		public String getValue() {
+			return s;
+		}
+
+		public static String getString(String s) {
+			for (OrderStatusToFlowIdMapper i : OrderStatusToFlowIdMapper.values()) {
+				if (i.getValue().equals(s)) {
+					return i.name();
+				}
+			}
+
+			return null;
+		}
+	}
+
+
 	public enum OrderStatus {
 		OPEN(0), BEING_PACKED(1), DISPATCHED(2), DELIVERED(3), CANCELLED_WITHIN_30_MINS(4), CANCELLED_WHILE_PACKAGING(
 				5), RETURN_PICKUP_REQUESTED(6), RETURNED(

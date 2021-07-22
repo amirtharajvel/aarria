@@ -155,7 +155,7 @@ public class PaymentController {
 			LOGGER.error("Payment Failed ", e);
 			String trace = Util.retrieveStackTraceFromException(e);
 			LOGGER.info("Payment failed info message = " + trace);
-			messageService.sendEmailAndSmsToAdmin(trace, "Payment failed!");
+			messageService.sendEmailAndSmsToAdmin(null,  "Payment failed!" + trace);
 			return orderFailure("in the exception block " + trace, view, PAYMENT_FAILED, session);
 		}
 
@@ -163,7 +163,7 @@ public class PaymentController {
 
 	private ModelAndView orderFailure(String logMessage, ModelAndView view, String userMessage, HttpSession session) {
 		LOGGER.error("Payment failed at " + logMessage);
-		messageService.sendEmailAndSmsToAdmin(logMessage, "Payment failed!");
+		messageService.sendEmailAndSmsToAdmin( null,"Payment failed!" + logMessage);
 		session.setAttribute("errorMessage", userMessage);
 		return view;
 	}

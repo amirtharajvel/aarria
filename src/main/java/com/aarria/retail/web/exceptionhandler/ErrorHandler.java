@@ -36,7 +36,7 @@ public class ErrorHandler {
 		ModelAndView view = new ModelAndView("errors");
 		view.setStatus(HttpStatus.NOT_FOUND);
 		String errorMessage = e + " " + Util.retrieveStackTraceFromException(e);
-		messageService.sendEmailToAdmin(errorMessage, "From Error Handler - Not found");
+		messageService.sendEmailToAdmin(null, errorMessage + "From Error Handler - Not found");
 		return view;
 	}
 
@@ -45,7 +45,7 @@ public class ErrorHandler {
 
 		String errorMessage = e + " " + Util.retrieveStackTraceFromException(e);
 
-		messageService.sendEmailToAdmin(errorMessage, "From Error Handler - Exception");
+		messageService.sendEmailToAdmin(null, errorMessage + "From Error Handler - Exception");
 
 		RedirectView rw = new RedirectView();
 
@@ -66,7 +66,7 @@ public class ErrorHandler {
 		String errorMessage = uri + "\n" + e.getMessage() + Util.retrieveStackTraceFromException(e);
 		view.addObject("errorMsg", errorMessage);
 
-		messageService.sendEmailToAdmin(errorMessage,
+		messageService.sendEmailToAdmin(null, errorMessage +
 				request.getRemoteAddr() + "-" + uri + "-MissingServletRequestParameterException-");
 
 		LOGGER.error("Caught the exception in MissingServletRequestParameterException error handler for uri " + uri, e);

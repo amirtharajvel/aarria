@@ -10,234 +10,298 @@ import com.aarria.retail.core.util.Constants;
 import com.aarria.retail.core.util.Enum.OTPAction;
 import com.aarria.retail.core.util.MailUtil;
 import com.aarria.retail.core.util.Util;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.BodyInserters;
+import org.springframework.web.reactive.function.client.WebClient;
 
+import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Service
 public class MessageServiceImpl implements MessageService {
 
-	private static final int ONE = 1;
+    private static final int ONE = 1;
 
-	private static final String SPACE = " ";
+    private Logger LOGGER = LogManager.getLogger(MessageServiceImpl.class);
 
-	private static final String YOUR_ORDER_FOR = " Your Order for ";
+    private WebClient client = WebClient.create();
 
-	private Logger LOGGER = LogManager.getLogger(MessageServiceImpl.class);
+    @Autowired
+    private AppProperties properties;
 
-	private static final String COLON = ":";
-	private static final String ORDER_CONFIRMED = "Order Confirmed";
-	private static final String ORDER_CANCELLED = "Order Cancelled";
+    @Autowired
+    private OTPService otpService;
 
-	@Autowired
-	private AppProperties properties;
+    @Override
+    public void sendSms(Order message, String mobile, boolean isOtp) {
+        this.sendSmsToUser(message, mobile, isOtp);
+    }
 
-	@Autowired
-	private OTPService otpService;
+    @Override
+    public void sendEmail(String message, String subject, String email) {
 
-	private RestTemplate restTemplate = new RestTemplate();
+    }
 
-	@Override
-	public void sendSms(String message, String mobile) {
-		this.sendSmsToUser(message, mobile);
-	}
+    @Override
+    public void sendEmailAndSmsToAdmin(Order order, String subject) {
+        sendEmailToAdmin(order, subject);
+        sendSmsToAdmin(order, false);
+    }
 
-	@Override
-	public void sendEmail(String message, String subject, String email) {
+    @Override
+    public void sendEmailToAdmin(Order order, String subject) {
+        try {
 
-	}
+            //TODO
+            MailUtil.sendEmail("ordersatfallsbuy@gmail.com", subject, "order");
 
-	@Override
-	public void sendEmailAndSmsToAdmin(String message, String subject) {
-		sendEmailToAdmin(message, subject);
-		sendSmsToAdmin(message);
-	}
+        } catch (Exception e) {
+            LOGGER.error("Error occurred in sendEmailToAdmin " + e);
+        }
+    }
 
-	@Override
-	public void sendEmailToAdmin(String message, String subject) {
-		try {
-			
-			MailUtil.sendEmail("ordersatfallsbuy@gmail.com", subject, message);
-			
-		} catch (Exception e) {
-			LOGGER.error("Error occurred in sendEmailToAdmin " + e);
-		}
-	}
+    @Override
+    public void sendEmailToAdmin(String email, String message, String subject) {
+        MailUtil.sendEmail(email, subject, message);
+    }
 
-	@Override
-	public void sendEmailToAdmin(String email, String message, String subject) {
-		MailUtil.sendEmail(email, subject, message);
-	}
+    @Override
+    public void sendSmsToAdmin(Order order, boolean isOtp) {
 
-	@Override
-	public void sendSmsToAdmin(String message) {
+        if (properties.isTurnOffSms) {
+            return;
+        }
 
-		if (properties.isTurnOffSms) {
-			return;
-		}
+        new Thread(() -> {
+            String mobile = "9901411006";
+            String result = sendSmsUsingFlow(createSmsRequest(order, mobile, isOtp));
+            LOGGER.info("Sms sent to admin mobile " + mobile + " result is " + result);
+        }).start();
+    }
 
-		new Thread(() -> {
-			String mobile = "9901411006";
-			final String uri = getPromotionalSMSURI(mobile, message);
-			String result = restTemplate.getForObject(uri, String.class);
-			LOGGER.info("Sms sent to admin mobile " + mobile + " result is " + result);
-		}).start();
-	}
+    private Request createSmsRequest(Order order, String mobile, boolean isOtp) {
 
-	private void sendSmsToUser(String message, String mobile) {
+        String orderId = order != null ? order.getOrderId() : "Empty Order Id";
+        String amount = order.getTotalOrderAmount() != null ? String.valueOf(order.getTotalOrderAmount()) : "-6";
 
-		if (properties.isTurnOffSms) {
-			return;
-		}
+        return new SmsRequest(Util.getFlowId(order, isOtp), mobile, Util.getOrderedProductName(order), orderId, amount);
+    }
 
-		LOGGER.info("Message is " + message);
-		System.out.println("Message is " + message);
+    private Request createOtpSmsRequest(String mobile, String otp) {
+        return new OtpRequest(Util.getFlowId(null, true), mobile, otp, Util.getIndiaTimeNow().toString());
+    }
 
-		new Thread(() -> {
-			final String uri = getPromotionalSMSURI(mobile, message);
-			String result = restTemplate.getForObject(uri, String.class);
-			LOGGER.info("Sms sent to mobile " + mobile + " result is " + result);
-		}).start();
-		sendEmailToAdmin("amirtharaj@live.com", message, "OTP sent to mobile " + mobile);
-	}
+    private void sendSmsToUser(Order order, String mobile, boolean isOtp) {
 
-	@Override
-	public void sendOTPSms(String mobile, String code, OTPAction action) {
+        if (properties.isTurnOffSms) {
+            return;
+        }
 
-		if (properties.isTurnOffSms) {
-			return;
-		}
+        new Thread(() -> {
+            String result = sendSmsUsingFlow(createSmsRequest(order, mobile, isOtp));
+            LOGGER.info("Sms sent to mobile " + mobile + " result is " + result);
+        }).start();
+        sendEmailToAdmin("amirtharaj@live.com", "OTP sent to mobile " + mobile, "OTP sent to mobile " + mobile);
+    }
 
-		if (!isValidOTPAttempt(mobile, action)) {
-			return;
-		}
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    private class Request {
 
-		final String message = getSMSOTPFormat(code);
-		final String uri = getOTPSMSURI(mobile, code);
+        private String flow_id;
+        private String mobiles;
 
-		new Thread(() -> {
-			String result = restTemplate.getForObject(uri, String.class);
-			LOGGER.info("OTP " + code + " sent to " + mobile + " result is " + result + " for action " + action.name());
-		}).start();
-		sendEmailToAdmin("amirtharaj@live.com", message,
-				"OTP sent to mobile " + mobile + " for action " + action.name());
+    }
 
-	}
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    private class SmsRequest extends Request {
 
-	private boolean isValidOTPAttempt(String mobile, OTPAction action) {
+        private String name;
 
-		String last10Digits = Util.getLast10Digits(mobile);
-		OTP otp = otpService.findByMobile(last10Digits);
+        @JsonProperty("order-id")
+        private String orderId;
+        private String amount;
 
-		boolean isMoreThan24Hours = otp == null ? false : Util.isMoreThan24Hours(otp.getDate());
-		if (otp == null || isMoreThan24Hours) {
-			otpService.save(new OTP(ONE, last10Digits, action.name(), Util.getIndiaTimeNow()));
-			LOGGER.info("in sendOTPSms otp is " + otp + " isMoreThan24Hours is " + isMoreThan24Hours);
-		} else {
+        public SmsRequest(String flowId, String mobile, String orderedProductName, String orderId, String amount) {
+            super(flowId, mobile);
 
-			int count = isMoreThan24Hours ? 0 : otp.getCount();
+            this.name = orderedProductName;
+            this.orderId = orderId;
+            this.amount = amount;
+        }
+    }
 
-			if (count > 5) {
-				LOGGER.info(
-						"ALERT!!!!! - Decided not to send OTP - " + otp + " isMoreThan24Hours is " + isMoreThan24Hours);
-				return false;
-			}
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    private class OtpRequest extends Request {
 
-			if (isMoreThan24Hours) {
-				otp.setDate(Util.getIndiaTimeNow());
-			}
+        private String otp;
+        private String time;
 
-			otp.setCount(++count);
-			otp.setActivity(action.name());
-			otpService.save(otp);
+        public OtpRequest(String flowId, String mobile, String otp, String time) {
+            super(flowId, mobile);
 
-		}
+            this.otp = otp;
+            this.time = time;
+        }
+    }
 
-		return true;
-	}
+    private String sendSmsUsingFlow(Request request) {
+        String response = null;
 
-	private String getPromotionalSMSURI(String mobile, final String message) {
-		final String uri = properties.getSmsGatwayUriPromotional() + mobile + "&message=" + message;
-		return uri;
-	}
+        try {
 
-	private String getOTPSMSURI(String mobile, final String code) {
-		final String uri = properties.getSmsGatwayUriOTP() + mobile + "&otp=" + code;
-		return uri;
-	}
+            //Request request = new Request("60efa52810c60c16bb0a5575",mobile, "Sare", "Order-id","amount");
+            response = client.post()
+                    .uri(new URI("https://api.msg91.com/api/v5/flow/"))
+                    .header("authkey", "147259AGbe4IxaKNP058dfaa20")
+                    .header("content-type", "application/JSON")
+                    //.contentType(MediaType.APPLICATION_JSON)
+                    .accept(MediaType.APPLICATION_JSON)
+                    .body(BodyInserters.fromValue(request))
+                    .retrieve()
+                    .bodyToMono(String.class)
+                    .block();
+            System.out.println("response is " + response);
 
-	private String getSMSOTPFormat(String code) {
+        } catch (Exception e) {
+            e.printStackTrace();
+            LOGGER.error("Unable to send flow SMS ", e);
+            response = e.getMessage();
+        }
 
-		String date = new SimpleDateFormat(Constants.DATE_WITH_TIME).format(new Date());
+        return response;
+    }
 
-		final String message = "Your One Time Password is " + code + " for www.aarria.com at " + date
-				+ " - Happy Quality Shopping!";
-		return message;
-	}
+    @Override
+    public void sendOTPSms(String mobile, String code, OTPAction action) {
 
-	// order related methods
-	@Override
-	public void sendConfirmCODOrderMessage(User user, String orderId, Order order) {
+        if (properties.isTurnOffSms) {
+            return;
+        }
 
-		String message = ORDER_CONFIRMED + COLON + YOUR_ORDER_FOR + Util.messageTemplate(order, Constants.CONFIRMED);
+        if (!isValidOTPAttempt(mobile, action)) {
+            return;
+        }
 
-		sendEmailAndSmsToAdmin(message, ORDER_CONFIRMED + COLON + SPACE + "COD - " + orderId);
-		sendSms(message, user.getMobile());
-	}
+        final String message = getSMSOTPFormat(code);
+        final String uri = getPromotionalSMSURI(mobile, code);
 
-	@Override
-	public void sendNONCODConfirmOrderMessage(User user, String orderId, Order order) {
-		String message = ORDER_CONFIRMED + COLON + YOUR_ORDER_FOR + Util.messageTemplate(order, Constants.CONFIRMED);
+        System.out.println("Message is " + message);
+        new Thread(() -> {
+            String result = sendSmsUsingFlow(createOtpSmsRequest(mobile, code));
+            LOGGER.info("OTP " + code + " sent to " + mobile + " result is " + result + " for action " + action.name());
+        }).start();
+        sendEmailToAdmin("amirtharaj@live.com", message,
+                "OTP sent to mobile " + mobile + " for action " + action.name());
 
-		sendEmailAndSmsToAdmin(message, ORDER_CONFIRMED + COLON + SPACE + "NON - COD " + orderId);
-		sendSms(message, user.getMobile());
-	}
+    }
 
-	@Override
-	public void sendCancelledOrderMessage(Order order, User user) {
+    private boolean isValidOTPAttempt(String mobile, OTPAction action) {
 
-		String message = ORDER_CANCELLED + COLON + YOUR_ORDER_FOR + Util.messageTemplate(order, Constants.CANCELLED);
+        String last10Digits = Util.getLast10Digits(mobile);
+        OTP otp = otpService.findByMobile(last10Digits);
 
-		sendEmailToAdmin(message, ORDER_CANCELLED + COLON + SPACE + order.getOrderId());
-		sendSms(message, user.getMobile());
-	}
+        boolean isMoreThan24Hours = otp == null ? false : Util.isMoreThan24Hours(otp.getDate());
+        if (otp == null || isMoreThan24Hours) {
+            otpService.save(new OTP(ONE, last10Digits, action.name(), Util.getIndiaTimeNow()));
+            LOGGER.info("in sendOTPSms otp is " + otp + " isMoreThan24Hours is " + isMoreThan24Hours);
+        } else {
 
-	@Override
-	public void sendMoneyDepositedToWalletMessage(User user, Double amount, Order order, String action) {
-		String message = "Rs." + amount + " is " + action + " your Wallet against order " + order.getOrderId();
-		sendSms(message, user.getMobile());
-		sendEmailAndSmsToAdmin(message, "Rs. " + amount + " is " + action + " Wallet for user " + user.getId());
-	}
+            int count = isMoreThan24Hours ? 0 : otp.getCount();
 
-	@Override
-	public void sendMoneyDepositedToBankMessage(User user, Double amount, Order order) {
+            if (count > 5) {
+                LOGGER.info(
+                        "ALERT!!!!! - Decided not to send OTP - " + otp + " isMoreThan24Hours is " + isMoreThan24Hours);
+                return false;
+            }
 
-		String message = "Rs." + amount + " is refunded to your Bank account against order " + order.getOrderId();
-		sendSms(message, user.getMobile());
-		sendEmailAndSmsToAdmin(message, "Rs. " + amount + " is deposited to Bank Account for user " + user.getId());
-	}
+            if (isMoreThan24Hours) {
+                otp.setDate(Util.getIndiaTimeNow());
+            }
 
-	@Override
-	public void sendReturnPickupMessage(Order order, User user) {
-		sendEmailToAdmin("Pick up arranged for order " + order.getOrderId(), "Pickup arranged");
-		String dateAndTime = " on " + order.getPickupDateAndTime() + " at " + order.getReturnPickupAddress();
-		sendSms("Pick up arranged for order " + order.getOrderId() + " for the amount "
-				+ Util.getTotalOrderAmount(order) + dateAndTime + ". Please keep the package ready.", user.getMobile());
-	}
+            otp.setCount(++count);
+            otp.setActivity(action.name());
+            otpService.save(otp);
 
-	@Override
-	public void sendReturnOrderPlacedMessage(User user, Order order) {
-		sendEmailAndSmsToAdmin("Return Order Placed: Order for " + Util.messageTemplate(order, Constants.RETURNED),
-				"Return order placed");
-		sendSms("Return order request is placed for the order " + order.getOrderId() + " for the amount "
-				+ Util.getTotalOrderAmount(order)
-				+ ". We'll contact you shortly.",
-				user.getMobile());
+        }
 
-	}
+        return true;
+    }
+
+    private String getPromotionalSMSURI(String mobile, final String message) {
+        final String uri = properties.getSmsGatwayUriPromotional() + mobile + "&message=" + message;
+        return uri;
+    }
+
+    private String getSMSOTPFormat(String code) {
+
+        String date = new SimpleDateFormat(Constants.DATE_WITH_TIME).format(new Date());
+
+        final String message = "Your One Time Password is " + code + " for www.aarria.com at " + date
+                + " - Happy Quality Shopping!";
+        return message;
+    }
+
+    // order related methods
+    @Override
+    public void sendConfirmCODOrderMessage(User user, String orderId, Order order) {
+        sendSms(order, user.getMobile(), false);
+    }
+
+    @Override
+    public void sendNONCODConfirmOrderMessage(User user, String orderId, Order order) {
+        sendSms(order, user.getMobile(), false);
+    }
+
+    @Override
+    public void sendCancelledOrderMessage(Order order, User user) {
+        sendSms(order, user.getMobile(), false);
+    }
+
+    @Override
+    public void sendMoneyDepositedToWalletMessage(User user, Double amount, Order order, String action) {
+        //TODO
+    }
+
+    @Override
+    public void sendMoneyDepositedToBankMessage(User user, Double amount, Order order) {
+        //TODO
+    }
+
+    @Override
+    public void sendReturnPickupMessage(Order order, User user) {
+        sendEmailToAdmin(order, "Pick up arranged for order " + order.getOrderId() + "Pickup arranged");
+        String dateAndTime = " on " + order.getPickupDateAndTime() + " at " + order.getReturnPickupAddress();
+        //TODO
+        //        sendSms("Pick up arranged for order " + order.getOrderId() + " for the amount "
+        //                + Util.getTotalOrderAmount(order) + dateAndTime + ". Please keep the package ready.", user.getMobile());
+    }
+
+    @Override
+    public void sendReturnOrderPlacedMessage(User user, Order order) {
+        //        sendEmailAndSmsToAdmin("Return Order Placed: Order for " + Util.messageTemplate(order, Constants.RETURNED),
+        //                "Return order placed");
+        sendSms(order,
+                user.getMobile(), false);
+
+    }
 }

@@ -37,8 +37,9 @@ public class WalletServiceImpl implements WalletService {
 	public void depositAmount(Double amount, User user, Order order) {
 
 		if (order == null) {
-			messageService.sendEmailAndSmsToAdmin(amount + "" + user + " tried to deposit amount but order is null",
-					"Order is null while depositing amount to Wallet. Please check on an emergency basis.");
+//			messageService.sendEmailAndSmsToAdmin(amount + "" + user + " tried to deposit amount but order is null",
+//					"Order is null while depositing amount to Wallet. Please check on an emergency basis.");
+			//TODO
 			return;
 		}
 
@@ -58,16 +59,18 @@ public class WalletServiceImpl implements WalletService {
 	public void deductAmount(Double amount, User user, Order order) {
 
 		if (order == null) {
-			messageService.sendEmailAndSmsToAdmin(amount + "" + user + " tried to deduct amount but order is null",
-					"Order is null while deducting amount to Wallet. Please check on an emergency basis.");
+//			messageService.sendEmailAndSmsToAdmin(amount + "" + user + " tried to deduct amount but order is null",
+//					"Order is null while deducting amount to Wallet. Please check on an emergency basis.");
+			//TODO
 			return;
 		}
 
 		Wallet wallet = findByUser(user);
 
 		if (wallet == null) {
-			messageService.sendEmailAndSmsToAdmin(amount + "" + user + " tried to deduct amount but wallet is null",
-					"Wallet is null while deducting from wallet");
+//			messageService.sendEmailAndSmsToAdmin(amount + "" + user + " tried to deduct amount but wallet is null",
+//					"Wallet is null while deducting from wallet");
+			//TODO
 			return;
 		}
 

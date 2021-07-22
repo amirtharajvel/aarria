@@ -158,8 +158,7 @@ public class OrderServiceImpl implements OrderService {
 				order.setSelectedAccountForRefund(dto.getSelectedAccountForRefund());
 			}
 
-			messageService.sendEmailAndSmsToAdmin("Non-COD Order " + order.getOrderId() + " is cancelled",
-					"NON-COD Order cancelled");
+			messageService.sendEmailAndSmsToAdmin(order, "Order Cancelled");
 		}
 
 		User user = order.getUser();
@@ -491,7 +490,7 @@ public class OrderServiceImpl implements OrderService {
 		try {
 			return orderRepository.save(order);
 		} catch (Exception e) {
-			messageService.sendEmailToAdmin(Util.retrieveStackTraceFromException(e), "Unable to save order");
+			messageService.sendEmailToAdmin(order, Util.retrieveStackTraceFromException(e));
 			return null;
 		}
 	}
@@ -918,15 +917,15 @@ public class OrderServiceImpl implements OrderService {
 
 	private void reportProductUnavailability(PrepareOrderResultDto result) {
 		messageService.sendEmailAndSmsToAdmin(
-				"It seems not all products has the required stock to continue. It might be sold out while you place order. Please re-verify the products with the updated stock and place the order once again.",
-				"Order is null");
+				null, "It seems not all products has the required stock to continue. It might be sold out while you place order. Please re-verify the products with the updated stock and place the order once again."
+				);
 		result.setMessage(
 				"It seems not all products has the required stock to continue. It might be sold out while you place order. Please re-verify the products with the updated stock and place the order once again.");
 		result.setReason(PlaceOrderFailReason.PRODUCT_COUNT_MISMATCH.name());
 	}
 
 	private void reportBuildOrderFailure(PrepareOrderResultDto result, Exception e) {
-		messageService.sendEmailAndSmsToAdmin("Order is null in the exception block in order service impl",
+		messageService.sendEmailAndSmsToAdmin(null, "Order is null in the exception block in order service impl" +
 				"Exception occurred while building order " + Util.retrieveStackTraceFromException(e));
 		LOGGER.error("Unable to build order ", e);
 		result.setMessage(

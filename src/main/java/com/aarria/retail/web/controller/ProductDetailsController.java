@@ -155,7 +155,7 @@ public class ProductDetailsController {
 			return dto;
 
 		} catch (Exception e) {
-			messageService.sendEmailToAdmin(Util.retrieveStackTraceFromException(e),
+			messageService.sendEmailToAdmin(null, Util.retrieveStackTraceFromException(e) +
 					"Product detail page exception block");
 			return null;
 		}

@@ -29,7 +29,7 @@ public class ResponseExceptionHandler extends ResponseEntityExceptionHandler {
 		LOGGER.error("Caught the exception in MissingServletRequestParameterException error handler ", e);
 		ModelAndView view = new ModelAndView("error");
 		String errorMessage = e.getMessage() + Util.retrieveStackTraceFromException(e);
-		messageService.sendEmailToAdmin(errorMessage, "From MissingServletRequestParameterException Error Handler");
+		messageService.sendEmailToAdmin(null, errorMessage +  "From MissingServletRequestParameterException Error Handler");
 		view.addObject("errorMsg", errorMessage);
 		LOGGER.info("In handleParameterMissingExceptions " + Util.retrieveStackTraceFromException(e));
 

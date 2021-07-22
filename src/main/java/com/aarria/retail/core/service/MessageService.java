@@ -6,19 +6,19 @@ import com.aarria.retail.core.util.Enum.OTPAction;
 
 public interface MessageService {
 
-	void sendSms(String message, String mobile);
+	void sendSms(Order message, String mobile, boolean isOtp);
 
 	void sendEmail(String message, String subject, String email);
 
-	void sendEmailAndSmsToAdmin(String message, String subject);
+	void sendEmailAndSmsToAdmin(Order message, String subject);
 
-	void sendOTPSms(String mobile, String code, OTPAction action);
+    void sendSmsToAdmin(Order order, boolean isOtp);
 
-	void sendEmailToAdmin(String message, String subject);
+    void sendOTPSms(String mobile, String code, OTPAction action);
+
+	void sendEmailToAdmin(Order message, String subject);
 
 	void sendEmailToAdmin(String email, String message, String subject);
-
-	void sendSmsToAdmin(String message);
 
 	// order messages
 	void sendConfirmCODOrderMessage(User user, String orderId, Order order);

@@ -177,21 +177,20 @@ public class AdminOrderServiceImpl implements AdminOrderService {
 			CancelOrderDto cancelDto = new CancelOrderDto(order.getId(), Constants.VIEW_ORDER_DETAILS,
 					dto.getReturnCashMethod(), null, "Cancelled by admin");
 
-			messageService.sendEmailToAdmin("Order with order id " + order.getOrderId() + " is cancelled",
-					"Order Cancelled");
+			messageService.sendEmailToAdmin(order, user.getMobile());
 			orderService.cancelOrder(cancelDto);
 			return;
 
 		}
 
 		if (order.getStatus().equals(OrderStatus.DELIVERED.ordinal())) {
-			messageService.sendSms("Order Delivered: Your order for " + Util.messageTemplate(order, Constants.DELIVERED),
-					user.getMobile());
+			messageService.sendSms( order,
+					user.getMobile(), false);
 		}
 
 		if (order.getStatus().equals(OrderStatus.DISPATCHED.ordinal())) {
-			messageService.sendSms("Order Dispatched: Your order for " + Util.messageTemplate(order, Constants.DISPATCHED),
-					user.getMobile());
+			messageService.sendSms(order,
+					user.getMobile(), false);
 		}
 
 		orderService.save(order);

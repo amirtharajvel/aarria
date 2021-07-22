@@ -33,7 +33,7 @@ public class ValidationServiceImpl implements ValidationService {
 		try {
 			userId = Long.parseLong(session.getAttribute("userId").toString());
 		} catch (Exception e) {
-			messageService.sendEmailAndSmsToAdmin("In session user id is not long vaue", "Not long valueF");
+			messageService.sendEmailAndSmsToAdmin(null, "In session user id is not long value" + "Not long value");
 			LOGGER.error("How come in session an userId is not a Long value.?!", e);
 			return null;
 		}
@@ -53,7 +53,7 @@ public class ValidationServiceImpl implements ValidationService {
 		try {
 			userId = Long.parseLong(session.getAttribute("userId").toString());
 		} catch (Exception e) {
-			messageService.sendEmailAndSmsToAdmin("In session user id is not long vaue", "Not long valueF");
+			messageService.sendEmailAndSmsToAdmin(null, "In session user id is not long vaue" + "Not long value");
 			LOGGER.error("How come in session an userId is not a Long value.?!", e);
 			return null;
 		}
