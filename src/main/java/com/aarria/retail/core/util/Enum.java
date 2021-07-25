@@ -96,8 +96,8 @@ public class Enum {
 
 		public static String getString(String s) {
 			for (OrderStatusToFlowIdMapper i : OrderStatusToFlowIdMapper.values()) {
-				if (i.getValue().equals(s)) {
-					return i.name();
+				if (i.name().equals(s)) {
+					return i.getValue();
 				}
 			}
 

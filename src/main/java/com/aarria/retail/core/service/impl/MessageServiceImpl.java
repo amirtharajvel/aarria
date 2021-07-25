@@ -11,16 +11,16 @@ import com.aarria.retail.core.util.Enum.OTPAction;
 import com.aarria.retail.core.util.MailUtil;
 import com.aarria.retail.core.util.Util;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.apache.http.cookie.SM;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ReactiveHttpOutputMessage;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.BodyInserter;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -90,16 +90,16 @@ public class MessageServiceImpl implements MessageService {
         }).start();
     }
 
-    private Request createSmsRequest(Order order, String mobile, boolean isOtp) {
+    private SmsRequest createSmsRequest(Order order, String mobile, boolean isOtp) {
 
         String orderId = order != null ? order.getOrderId() : "Empty Order Id";
         String amount = order.getTotalOrderAmount() != null ? String.valueOf(order.getTotalOrderAmount()) : "-6";
 
-        return new SmsRequest(Util.getFlowId(order, isOtp), mobile, Util.getOrderedProductName(order), orderId, amount);
+        return new SmsRequest(Util.getFlowId(order, isOtp), "91" + mobile, Util.getOrderedProductName(order), orderId, amount);
     }
 
-    private Request createOtpSmsRequest(String mobile, String otp) {
-        return new OtpRequest(Util.getFlowId(null, true), mobile, otp, Util.getIndiaTimeNow().toString());
+    private OtpRequest createOtpSmsRequest(String mobile, String otp) {
+        return new OtpRequest(Util.getFlowId(null, true),"91" + mobile, otp, Util.getIndiaTimeNow().toString());
     }
 
     private void sendSmsToUser(Order order, String mobile, boolean isOtp) {
@@ -115,6 +115,7 @@ public class MessageServiceImpl implements MessageService {
         sendEmailToAdmin("amirtharaj@live.com", "OTP sent to mobile " + mobile, "OTP sent to mobile " + mobile);
     }
 
+    @ToString
     @Getter
     @Setter
     @AllArgsConstructor
@@ -126,46 +127,69 @@ public class MessageServiceImpl implements MessageService {
 
     }
 
+    @ToString
     @Getter
     @Setter
     @AllArgsConstructor
     @NoArgsConstructor
-    private class SmsRequest extends Request {
+    private class SmsRequest {
 
+        private String flow_id;
+        private String mobiles;
         private String name;
-
         @JsonProperty("order-id")
         private String orderId;
         private String amount;
 
-        public SmsRequest(String flowId, String mobile, String orderedProductName, String orderId, String amount) {
-            super(flowId, mobile);
-
-            this.name = orderedProductName;
-            this.orderId = orderId;
-            this.amount = amount;
-        }
     }
 
     @Getter
     @Setter
     @AllArgsConstructor
     @NoArgsConstructor
-    private class OtpRequest extends Request {
+    private class OtpRequest{
 
+
+        private String flow_id;
+        private String mobiles;
         private String otp;
         private String time;
 
-        public OtpRequest(String flowId, String mobile, String otp, String time) {
-            super(flowId, mobile);
-
-            this.otp = otp;
-            this.time = time;
-        }
     }
 
-    private String sendSmsUsingFlow(Request request) {
+    private String sendSmsUsingFlow(SmsRequest request) {
         String response = null;
+
+        System.out.println("Flow request is " + request);
+
+        try {
+
+            BodyInserter<SmsRequest, ReactiveHttpOutputMessage> bodyInserter = BodyInserters.fromValue(request);
+            response = client.post()
+                    .uri(new URI("https://api.msg91.com/api/v5/flow/"))
+                    .header("authkey", "147259AGbe4IxaKNP058dfaa20")
+                    .header("content-type", "application/JSON")
+                    //.contentType(MediaType.APPLICATION_JSON)
+                    .accept(MediaType.APPLICATION_JSON)
+                    .body(bodyInserter)
+                    .retrieve()
+                    .bodyToMono(String.class)
+                    .block();
+            System.out.println("response is " + response);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            LOGGER.error("Unable to send flow SMS ", e);
+            response = e.getMessage();
+        }
+
+        return response;
+    }
+
+    private String sendOtpSmsUsingFlow(OtpRequest request) {
+        String response = null;
+
+        System.out.println("Flow request is " + request);
 
         try {
 
@@ -207,7 +231,7 @@ public class MessageServiceImpl implements MessageService {
 
         System.out.println("Message is " + message);
         new Thread(() -> {
-            String result = sendSmsUsingFlow(createOtpSmsRequest(mobile, code));
+            String result = sendOtpSmsUsingFlow(createOtpSmsRequest(mobile, code));
             LOGGER.info("OTP " + code + " sent to " + mobile + " result is " + result + " for action " + action.name());
         }).start();
         sendEmailToAdmin("amirtharaj@live.com", message,
