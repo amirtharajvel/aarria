@@ -7,6 +7,7 @@ import com.aarria.retail.core.service.MessageService;
 import com.aarria.retail.core.service.OTPService;
 import com.aarria.retail.core.util.AppProperties;
 import com.aarria.retail.core.util.Constants;
+import com.aarria.retail.core.util.Enum;
 import com.aarria.retail.core.util.Enum.OTPAction;
 import com.aarria.retail.core.util.MailUtil;
 import com.aarria.retail.core.util.Util;
@@ -112,6 +113,11 @@ public class MessageServiceImpl implements MessageService {
             String result = sendSmsUsingFlow(createSmsRequest(order, mobile, isOtp));
             LOGGER.info("Sms sent to mobile " + mobile + " result is " + result);
         }).start();
+
+        if(Enum.OrderStatus.OPEN.ordinal() == order.getStatus().intValue()) {
+            sendSmsToAdmin(order, false);
+        }
+
         sendEmailToAdmin("amirtharaj@live.com", "OTP sent to mobile " + mobile, "OTP sent to mobile " + mobile);
     }
 
@@ -158,6 +164,7 @@ public class MessageServiceImpl implements MessageService {
     }
 
     private String sendSmsUsingFlow(SmsRequest request) {
+
         String response = null;
 
         System.out.println("Flow request is " + request);
