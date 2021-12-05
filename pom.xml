@@ -12,6 +12,7 @@
 	<artifactId>retail</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>retail</name>
+	<packaging>war</packaging>
 	<description>aarria.com</description>
 
 	<properties>
@@ -99,7 +100,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<optional>true</optional>
+			<version>1.18.20</version>
 		</dependency>
 		<dependency>
 			<groupId>com.lambdaworks</groupId>
@@ -168,8 +169,9 @@
 			<artifactId>spring-boot-starter-webflux</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.tomcat.embed</groupId>
-			<artifactId>tomcat-embed-jasper</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
