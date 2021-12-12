@@ -12,6 +12,7 @@ import com.aarria.retail.persistence.repository.ProductStockRepository;
 import com.aarria.retail.persistence.repository.custom.ProductsWithAttributeRepository;
 import com.aarria.retail.web.dto.request.*;
 import com.aarria.retail.web.dto.response.*;
+import com.google.common.collect.ImmutableList;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.text.WordUtils;
@@ -39,6 +40,7 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.*;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -70,6 +72,11 @@ public class ProductServiceImpl implements ProductService {
 
 	@Autowired
 	private ImageUploadService imageUploadService;
+
+	private List<String> attributeSort = ImmutableList.of("Size","Material","Color","Occasion","Brand","Type");
+
+	private Comparator<RefinerDto> attributeOrder = Comparator.comparing(
+			c -> attributeSort.indexOf(c.getName()));
 
 	@Override
 	public Product findByPidWithStock(String pid) {
@@ -273,7 +280,10 @@ public class ProductServiceImpl implements ProductService {
 				attributes.add(attributeDto);
 
 				RefinerDto refinerDto = new RefinerDto(WordUtils.capitalizeFully(attribute.getRefiner()), attributes);
-				map.put(attribute.getRefiner(), refinerDto);
+
+				if(isRefinerNeeded(refinerDto)) {
+					map.put(attribute.getRefiner(), refinerDto);
+				}
 
 			} else {
 				RefinerDto dto = map.get(attribute.getRefiner());
@@ -292,10 +302,20 @@ public class ProductServiceImpl implements ProductService {
 
 		}
 
-		FilterDto dto = new FilterDto(minPrice.intValue(), maxPrice.intValue(), new ArrayList<>(map.values()));
+		FilterDto dto = new FilterDto(minPrice.intValue(), maxPrice.intValue(), new ArrayList<>(map.values().stream().sorted(attributeOrder).collect(Collectors.toList())));
 
 		return dto;
 
+	}
+
+	private boolean isRefinerNeeded(RefinerDto refinerDto) {
+		if(refinerDto.getName().equalsIgnoreCase("Size") && refinerDto.getUniqueAttributes().size() == 1) {
+			if(refinerDto.getUniqueAttributes().stream().findFirst().get().getValue().equals("NA")) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 	@Override

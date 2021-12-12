@@ -48,73 +48,16 @@
 	        </div>
 	    
 	        
-	        <div class="collapse navbar-collapse js-navbar-collapse">
-            					<ul class="nav navbar-nav">
-            						<li class="dropdown mega-dropdown"><a href="#"
-            							class="dropdown-toggle" data-toggle="dropdown">All Women <span
-            								class="caret"></span></a>
-            							<ul class="dropdown-menu mega-dropdown-menu">
-            								<li class="col-sm-2">
-            									<ul>
-            										<li class="dropdown-header"><a href="products?cat=201"
-            											style="color: #62bd7f;">Top</a></li>
-            										<li><a href="products?cat=2001">T-Shirt</a></li>
-            										<li><a href="products?cat=2002">T-Shirt F/S</a></li>
-            										<li><a href="products?cat=2003">T-Shirt H/S</a></li>
-            										<li><a href="products?cat=2004">Top F/S</a></li>
-            										<li><a href="products?cat=2005">Tunic</a></li>
-            										<li><a href="products?cat=2006">Dress</a></li>
-            										<li><a href="products?cat=2007">Polo</a></li>
-            									</ul>
-            								</li>
-            							</ul>
-            						</li>
-            						<li class="dropdown mega-dropdown">
-            						    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Kurtis
-            						    <span class="caret"></span></a>
-                                        <ul class="dropdown-menu mega-dropdown-menu">
-                                            <li class="col-sm-2">
-                                                <ul>
-                                                    <li class="dropdown-header"><a href="products?cat=201"
-                                                        style="color: #62bd7f;">Party Wear</a></li>
-                                                    <li><a href="products?cat=2001">Regular Wear</a></li>
-                                                    <li><a href="products?cat=2002">Party Wear</a></li>
-
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-
-                                    <li class="dropdown mega-dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sarees <span class="caret"></span></a>
-                                        <ul class="dropdown-menu mega-dropdown-menu">
-                                            <li class="col-sm-2">
-                                                <ul>
-                                                    <!--<li class="dropdown-header"><a href="products?cat=201"
-                                                        style="color: #62bd7f;">Party Wear</a></li>-->
-                                                    <li><a href="products?cat=2001">Regular Wear</a></li>
-                                                    <li><a href="products?cat=2002">Party Wear</a></li>
-
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="dropdown mega-dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dress Materials <span class="caret"></span></a>
-                                        <ul class="dropdown-menu mega-dropdown-menu">
-                                            <li class="col-sm-2">
-                                                <ul>
-                                                    <!--<li class="dropdown-header"><a href="products?cat=201"
-                                                        style="color: #62bd7f;">Party Wear</a></li>-->
-                                                    <li><a href="products?cat=2001">Regular Wear</a></li>
-                                                    <li><a href="products?cat=2002">Party Wear</a></li>
-
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-            					</ul>
-            					</div>
+	        <div class="collapse navbar-collapse padding-0" id="navbar-collapse-1" style="font-size:16px">
+	          <ul class="nav navbar-nav">
+				<li><a href="/products/cat/4?page=1&sort=Price:%20Low%20To%20High">All Women</a></li>
+				<li><a href="/products/cat/4001?page=1&sort=Price:%20Low%20To%20High">Sarees</a></li>
+				<li><a href="/products/cat/4002?page=1&sort=Price:%20Low%20To%20High">Kurtis</a></li>
+				<li><a href="/products/cat/4003?page=1&sort=Price:%20Low%20To%20High">Dress	Materials</a></li>
+				<!-- <li><a href="/products/cat/402?page=1&sort=Price:%20Low%20To%20High">Western</a></li> -->
+				<!-- <li><a href="/products/cat/4?sort=Price:%20Low%20To%20High&child_cat=4&ref=-1&page=0">Women</a></li> -->
+			  </ul>
+	        </div>
 	      </div>
 	    </nav>		
 	</div>

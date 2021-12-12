@@ -26,7 +26,7 @@ public interface AttributeRepository extends JpaRepository<Attribute, Long> {
 	@Query("select distinct a from Attribute a where a.refiner = :refiner and a.value = :value")
 	public Set<Attribute> findByRefinerAndValue(@Param("refiner") String refiner, @Param("value") String value);
 
-	@Query("select distinct a from Attribute a where a.category.id in (:categoryIds)")
+	@Query("select distinct a from Attribute a inner join a.category c where c.id in (:categoryIds)")
 	public Set<Attribute> findByCategoryIds(@Param("categoryIds") Set<Long> categoryIds);
 
 	@Query("select a from Attribute a where a.id in (:ids)")
