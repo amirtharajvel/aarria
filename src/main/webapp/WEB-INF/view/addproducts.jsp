@@ -118,7 +118,7 @@
 
 									</div>
 								</div>
-								<%-- <div class="row">
+								<div class="row">
 									<div class="col-lg-6 first_row">
 										<form:errors class="error" path="price" />
 										Selling Price
@@ -127,8 +127,8 @@
 										<form:input class="form-control" path="price" tabindex="4"
 											type="number" name="price" title="" step="0.01" />
 									</div>
-								</div> --%>
-								<div class="row">
+								</div>
+								<!--<div class="row">
 									<div class="col-lg-6 first_row">
 										<form:errors class="error" path="profitToBeAdded" />
 										Profit
@@ -139,7 +139,7 @@
 											step="0.01" />
 
 									</div>
-								</div>
+								</div>-->
 								<div class="row">
 									<div class="col-lg-6 first_row">
 										<form:errors class="error" path="catalogue" />
@@ -151,7 +151,7 @@
 
 									</div>
 								</div>
-								<div class="row">
+								<%--<div class="row">
 									<div class="col-lg-6 first_row">
 										<form:errors class="error" path="igstRate" />
 										GST Percentage
@@ -173,7 +173,7 @@
 
 									</div>
 								</div>
-								<%-- <div class="row">
+								 <div class="row">
 									<div class="col-lg-6 first_row">
 										<form:errors class="error" path="offerQuantity" />
 										Offer Quantity

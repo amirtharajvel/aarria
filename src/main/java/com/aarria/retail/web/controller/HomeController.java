@@ -1,22 +1,5 @@
 package com.aarria.retail.web.controller;
 
-import static com.aarria.retail.core.util.View.ABOUT_US;
-import static com.aarria.retail.core.util.View.CART;
-import static com.aarria.retail.core.util.View.CHANGE_PASSWORD;
-import static com.aarria.retail.core.util.View.COOKIE_POLICY;
-import static com.aarria.retail.core.util.View.ERROR;
-import static com.aarria.retail.core.util.View.FORGOT_PASSWORD;
-import static com.aarria.retail.core.util.View.HOME;
-import static com.aarria.retail.core.util.View.LOGIN;
-import static com.aarria.retail.core.util.View.MY_ORDERS;
-import static com.aarria.retail.core.util.View.PINCODE_UPLOAD;
-import static com.aarria.retail.core.util.View.POST;
-import static com.aarria.retail.core.util.View.PRIVACY_POLICY;
-import static com.aarria.retail.core.util.View.REGISTER;
-import static com.aarria.retail.core.util.View.RETURN_POLICY;
-import static com.aarria.retail.core.util.View.SIZE_CHART;
-import static com.aarria.retail.core.util.View.TERMS_OF_SERVICE;
-
 import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
@@ -32,6 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.aarria.retail.core.util.AppProperties;
 import com.aarria.retail.web.dto.request.LoginDto;
 import com.aarria.retail.web.dto.request.RegisterInputDto;
+
+import static com.aarria.retail.core.util.View.*;
 
 @Controller
 public class HomeController {
@@ -132,6 +117,12 @@ public class HomeController {
 	@RequestMapping(value = "/returnpolicy")
 	public ModelAndView returnPolicy() {
 		ModelAndView modelAndView = new ModelAndView(RETURN_POLICY);
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "/store")
+	public ModelAndView store() {
+		ModelAndView modelAndView = new ModelAndView(STORE);
 		return modelAndView;
 	}
 

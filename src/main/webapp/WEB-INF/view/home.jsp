@@ -541,6 +541,7 @@ opacity
 						<li><a href="/aboutus#who_we_are">Company</a></li>
 						<li><a href="/aboutus#contact_us">Contact Us</a></li>
 						<li><a href="/aboutus#contact_us">Customer Care</a></li>
+
 					</ul>
 				</div>
 				<div class="col-xs-12 col-sm-4 col-md-2">

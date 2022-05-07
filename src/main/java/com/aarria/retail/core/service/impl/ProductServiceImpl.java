@@ -390,9 +390,10 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	private void fixPrice(AddProductDto dto, Product product) {
-		Double price = ProductPrice.getFinalPrice(product).doubleValue();
+		//ProductPrice.getFinalPrice(product).doubleValue(); -remove calculation
+		Double price = dto.getPrice();
 
-		product.setPrice(price);
+		product.setPrice(dto.getPrice());
 		product.setDiscount(Util.calculateDiscount(product.getActualPrice(), price));
 	}
 

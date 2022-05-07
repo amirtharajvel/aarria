@@ -39,7 +39,7 @@
 					<li><a href="/aboutus#who_we_are">Company</a></li>
 					<li><a href="/aboutus#contact_us">Contact Us</a></li>
 					<li><a href="/aboutus#contact_us">Customer Care</a></li>
-					<!-- <li><a href="aboutus#privacy_policy">Sell</a></li> -->
+					<li><a href="/store">Store Location</a></li>
 				</ul>
 			</div>
 			<div class="col-xs-12 col-sm-4 col-md-2">
@@ -130,7 +130,7 @@
 	<div class="container">
 		<div class="row" style="padding-right: 0%;">
 			<div class="col-xs-12 col-sm-8 col-md-8">
-				<span>Copyright © Fallsbuy Ecommerce Private Limited 2016</span>
+				<span>Copyright ï¿½ Fallsbuy Ecommerce Private Limited 2016</span>
 
 			</div>
 			<div class="col-xs-12 col-sm-4 col-md-4 text-right"

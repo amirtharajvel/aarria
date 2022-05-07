@@ -704,7 +704,7 @@ a, a:link, a:visited, a:focus, a:hover, a:active {
 						<li><a href="/aboutus#who_we_are">Company</a></li>
 						<li><a href="/aboutus#contact_us">Contact Us</a></li>
 						<li><a href="/aboutus#contact_us">Customer Care</a></li>
-						<!-- <li><a href="aboutus#privacy_policy">Sell</a></li> -->
+						<li><a href="/store">Store Location</a></li>
 					</ul>
 				</div>
 			</div>

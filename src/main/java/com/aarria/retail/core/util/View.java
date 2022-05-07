@@ -26,6 +26,7 @@ public class View {
 	public static final String PRIVACY_POLICY = "privacypolicy";
 	public static final String COOKIE_POLICY = "cookiepolicy";
 	public static final String RETURN_POLICY = "returnpolicy";
+	public static final String STORE = "store";
 	public static final String POST = "post";
 	public static final String RETURN_ORDER = "returnorder";
 	public static final String INVOICE = "invoice";
