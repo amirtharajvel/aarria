@@ -18,7 +18,6 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 
-@ControllerAdvice
 public class ErrorHandler {
 
 	private static Logger LOGGER = LogManager.getLogger(ErrorHandler.class);
@@ -26,12 +25,12 @@ public class ErrorHandler {
 	@Autowired
 	private MessageService messageService;
 
-	@ExceptionHandler(value = IllegalStateException.class)
+	//@ExceptionHandler(value = IllegalStateException.class)
 	public String handleIllegalStateExceptions() {
 		return "home";
 	}
 
-	@ExceptionHandler(value = ResourceNotFoundException.class)
+	//@ExceptionHandler(value = ResourceNotFoundException.class)
 	public ModelAndView handleResourceNotFoundExceptions(ResourceNotFoundException e, HttpServletRequest request) {
 		ModelAndView view = new ModelAndView("errors");
 		view.setStatus(HttpStatus.NOT_FOUND);
@@ -40,7 +39,7 @@ public class ErrorHandler {
 		return view;
 	}
 
-	@ExceptionHandler(value = Exception.class)
+	//@ExceptionHandler(value = Exception.class)
 	public RedirectView handleAllExceptions(Exception e, HttpServletRequest request) {
 
 		String errorMessage = e + " " + Util.retrieveStackTraceFromException(e);
@@ -57,7 +56,7 @@ public class ErrorHandler {
 		return rw;
 	}
 
-	@ExceptionHandler(value = MissingServletRequestParameterException.class)
+	//@ExceptionHandler(value = MissingServletRequestParameterException.class)
 	public ModelAndView handleParameterMissingExceptions(HttpServletRequest request,
 			MissingServletRequestParameterException e) {
 
