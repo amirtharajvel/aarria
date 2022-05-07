@@ -50,12 +50,14 @@
 	        
 	        <div class="collapse navbar-collapse padding-0" id="navbar-collapse-1" style="font-size:16px">
 	          <ul class="nav navbar-nav">
-				<li><a href="/products/cat/4?page=1&sort=Price:%20Low%20To%20High">All Women</a></li>
-				<li><a href="/products/cat/4001?page=1&sort=Price:%20Low%20To%20High">Sarees</a></li>
-				<li><a href="/products/cat/4002?page=1&sort=Price:%20Low%20To%20High">Kurtis</a></li>
-				<li><a href="/products/cat/4003?page=1&sort=Price:%20Low%20To%20High">Dress	Materials</a></li>
-				<!-- <li><a href="/products/cat/402?page=1&sort=Price:%20Low%20To%20High">Western</a></li> -->
-				<!-- <li><a href="/products/cat/4?sort=Price:%20Low%20To%20High&child_cat=4&ref=-1&page=0">Women</a></li> -->
+				<li><a href="/products/cat/4?page=1&sort=Price:%20Low%20To%20High&excludeSoldOut=1">All Women</a></li>
+				<li><a href="/products/cat/40001?page=1&sort=Price:%20Low%20To%20High&excludeSoldOut=1">Salwar Suits</a></li>
+				<li><a href="/products/cat/4001?page=1&sort=Price:%20Low%20To%20High&excludeSoldOut=1">Sarees</a></li>
+				<li><a href="/products/cat/4002?page=1&sort=Price:%20Low%20To%20High&excludeSoldOut=1">Kurtis</a></li>
+				<li><a href="/products/cat/4003?page=1&sort=Price:%20Low%20To%20High&excludeSoldOut=1">Dress Materials</a></li>
+				<li><a href="/products/cat/402?page=1&sort=Price:%20Low%20To%20High&excludeSoldOut=1">Western</a></li>
+				<li><a href="/products/cat/4005?sort=Price:%20Low%20To%20High&child_cat=4&ref=-1&page=0&excludeSoldOut=1">Bottom Wear</a></li>
+				<li><a href="/products/cat/4004?sort=Price:%20Low%20To%20High&child_cat=4&ref=-1&page=0&excludeSoldOut=1">Night Wear</a></li>
 			  </ul>
 	        </div>
 	      </div>

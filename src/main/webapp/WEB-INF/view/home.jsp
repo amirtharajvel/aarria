@@ -599,7 +599,7 @@ opacity
 			<div class=container>
 				<div class=row>
 					<div class="col-xs-12 col-sm-8 col-md-8">
-						<span>Copyright © Fallsbuy ECommerce Private Limited 2016</span>
+						<span>Copyright ï¿½ Fallsbuy ECommerce Private Limited 2016</span>
 					</div>
 					<div class="col-xs-12 col-sm-4 col-md-4 text-right">
 						<ul class="nav nav-pills payments">

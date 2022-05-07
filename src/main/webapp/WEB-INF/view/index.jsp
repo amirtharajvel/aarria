@@ -50,21 +50,21 @@ a, a:link, a:visited, a:focus, a:hover, a:active {
 				<ul id="menu-cool" class="menu">
 					<li id="menu-item-976"
 						class="menu-item menu-item-type-custom menu-item-object-custom menu-item-976"><a
-						href="/products/cat/4?page=1&sort=Price:%20Low%20To%20High">All
+						href="/products/cat/4?page=1&sort=Price:%20Low%20To%20High&excludeSoldOut=1">All
 							Women </a></li>
 					<li id="menu-item-1001"
 						class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1001"><a
-						href="/products/cat/4001?page=1&sort=Price:%20Low%20To%20High">Sarees</a></li>
+						href="/products/cat/40001?page=1&sort=Price:%20Low%20To%20High&excludeSoldOut=1">Salwar Suits</a></li>
 					<li id="menu-item-970"
 						class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-970"><a
-						href="/products/cat/4002?page=1&sort=Price:%20Low%20To%20High">Kurtis</a></li>
+						href="/products/cat/4002?page=1&sort=Price:%20Low%20To%20High&excludeSoldOut=1">Kurtis</a></li>
 					<li id="menu-item-971"
 						class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-971"><a
-						href="/products/cat/4003?page=1&sort=Price:%20Low%20To%20High">Dress
+						href="/products/cat/4003?page=1&sort=Price:%20Low%20To%20High&excludeSoldOut=1">Dress
 							Materials</a></li>
 					<li id="menu-item-972"
 						class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-972"><a
-						href="/products/cat/402?page=1&sort=Price:%20Low%20To%20High">Western</a></li>
+						href="/products/cat/402?page=1&sort=Price:%20Low%20To%20High&excludeSoldOut=1">Western</a></li>
 				</ul>
 			</div>
 			<div style="float: right; padding-right: 2%; margin-top: -1%;">

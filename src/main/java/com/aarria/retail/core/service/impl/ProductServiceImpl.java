@@ -456,14 +456,16 @@ public class ProductServiceImpl implements ProductService {
 
 		saveSizes(dto, product, attributes);
 
-		saveSearchaleAttributes(dto, product, attributes);
+		saveSearchableAttributes(dto, product, attributes);
 
 		product.setPid(UUID.randomUUID().toString() + product.getId());
 
 	}
 
-	private void saveSearchaleAttributes(AddProductDto dto, Product product, Set<Attribute> attributes) {
+	private void saveSearchableAttributes(AddProductDto dto, Product product, Set<Attribute> attributes) {
 		List<SearchableAttributeDto> searchableAttributes = dto.getSearchableAttributes();
+
+		LOGGER.info("searchableAttributes " + searchableAttributes);
 
 		if (!CollectionUtils.isEmpty(searchableAttributes)) {
 			searchableAttributes.forEach(s -> {
@@ -475,6 +477,8 @@ public class ProductServiceImpl implements ProductService {
 
 					Attribute existingAttribute = CollectionUtils.isNotEmpty(attributesFromDb) ? attributesFromDb.get(0)
 							: null;
+
+					LOGGER.info("existingAttribute is " + existingAttribute);
 
 					Set<Category> categories = new HashSet<>();
 					for (Long id : dto.getCategories()) {
@@ -490,6 +494,7 @@ public class ProductServiceImpl implements ProductService {
 							attribute.setValue(WordUtils.capitalizeFully(s.getValue().trim()));
 							attribute.setCategory(c);
 
+							LOGGER.info("Trying to save attribute " + attribute);
 							existingAttribute = attributeService.save(attribute);
 						}
 					}
