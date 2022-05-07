@@ -14,6 +14,8 @@
 	<name>retail</name>
 	<description>aarria.com</description>
 
+	<packaging>war</packaging>
+
 	<properties>
 		<java.version>11</java.version>
 	</properties>
