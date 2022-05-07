@@ -233,23 +233,13 @@
 		<finalName>aarria</finalName>
 		<plugins>
 			<plugin>
-				<groupId>org.codehaus.cargo</groupId>
-				<artifactId>cargo-maven2-plugin</artifactId>
-				<version>1.8.3</version>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>
 				<configuration>
-					<container>
-						<containerId>tomcat9x</containerId>
-						<type>embedded</type>
-					</container>
-					<deployables>
-						<deployable>
-							<type>war</type>
-							<location>${project.build.directory}/${project.build.finalName}.war</location>
-							<properties>
-								<context>/</context>
-							</properties>
-						</deployable>
-					</deployables>
+					<url>http://localhost:8080/</url>
+					<server>TomcatServer</server>
+					<path>/aarria</path>
 				</configuration>
 			</plugin>
 			<plugin>
