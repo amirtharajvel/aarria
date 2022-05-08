@@ -587,7 +587,11 @@ public class ProductServiceImpl implements ProductService {
 						Attribute attribute = new Attribute();
 						attribute.setRefiner(Refiners.COLOR.name());
 						attribute.setValue(color.trim());
-						attribute.setCategory(categories.iterator().next());
+						Category next = categories.iterator().next();
+						if(next == null) {
+							throw new RuntimeException("No category set!");
+						}
+						attribute.setCategory(next);
 
 						existingAttribute = attributeService.save(attribute);
 					}
