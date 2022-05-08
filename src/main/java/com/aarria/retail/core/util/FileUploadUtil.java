@@ -87,7 +87,7 @@ public class FileUploadUtil {
 			JSch jsch = new JSch();
 			// jsch.addIdentity(properties.getCdnPrivateKeyLocation());
 			session = jsch.getSession(Application.CDN_HOST_USERNAME, properties.getCdnUrl(), 22);
-			session.setPassword("Super*Star77");
+			session.setPassword("Z!*8UR{~BjAZ");
 			java.util.Properties config = new java.util.Properties();
 			config.put("StrictHostKeyChecking", "no");
 			session.setConfig(config);
@@ -98,7 +98,7 @@ public class FileUploadUtil {
 
 			return channelSftp;
 		} catch (Exception e) {
-			throw new RuntimeException("Unable to get sftp connection..");
+			throw new RuntimeException("Unable to get sftp connection.." + e);
 		}
 	}
 
