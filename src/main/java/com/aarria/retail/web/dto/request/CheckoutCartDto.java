@@ -13,6 +13,7 @@ public class CheckoutCartDto {
 	private Integer quantity;
 	private Long colorId;
 	private String size;
+	private Double sellingPriceBeforeOffer;
 	private Double unitPrice;
 	private String pid;
 	private String offerCode;
@@ -47,7 +48,7 @@ public class CheckoutCartDto {
 		}
 		
 		this.setPrice(cart.getPrice());
-		this.setUnitPrice(cart.getProduct().getPrice());
+		this.setUnitPrice(cart.getProduct().getActualPrice());
 		this.setQuantity(cart.getQuantity());
 
 	}
@@ -146,6 +147,14 @@ public class CheckoutCartDto {
 
 	public void setStock(Integer stock) {
 		this.stock = stock;
+	}
+
+	public Double getSellingPriceBeforeOffer() {
+		return sellingPriceBeforeOffer;
+	}
+
+	public void setSellingPriceBeforeOffer(Double sellingPriceBeforeOffer) {
+		this.sellingPriceBeforeOffer = sellingPriceBeforeOffer;
 	}
 
 	@Override

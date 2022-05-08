@@ -240,7 +240,7 @@
 												<div style="float: left;">
 													<input minlength="3"
 														style="width: 100px; border-radius: 4px; font-size: 12px;"
-														id="otp" type="text" id="couponcode" class="form-control"
+														type="text" id="couponcode" class="form-control"
 														type="text" name="couponCode" placeholder="OFFER CODE"
 														required="required" autofocus="autofocus"
 														title="Enter a coupon code" value="${couponCode}" />
@@ -299,8 +299,9 @@
 														<th>Size</th>
 														<th style="width: 15%;">Quantity</th>
 														<th>Stock</th>
+														<th>MRP</th>
 														<th>Price</th>
-														<!-- <th>Offer Price</th> -->
+														<th>Offer Price</th>
 														<th>Total Price</th>
 													</tr>
 												</thead>
@@ -346,31 +347,32 @@
 																</td>
 																<td>${product.stock }</td>
 																<td>&#8377; ${product.unitPrice}</td>
-																<%-- <td><c:if
-																		test="${couponCodeAppliedMessage == 'Offer Applied!' }">
+																<td>&#8377; ${product.sellingPriceBeforeOffer}</td>
+																<td><c:if
+																		test="${couponCodeAppliedMessage == 'Hurray.. Coupon code applied!!' }">
 																		<span
 																			style="color: #ff00a9; font-weight: bold; margin-left: 2%;">&#8377;
 																			${product.amountAfterOfferApplied }</span>
-																	</c:if></td> --%>
+																	</c:if></td>
 																<td id="totalunitprice${product.pid}${product.size}">${product.price}</td>
 															</tr>
 														</c:forEach>
 													</c:if>
 													<tr class="total-cost">
-														<td colspan="5"></td>
+														<td colspan="7"></td>
 														<td><b>Total</b></td>
 														<td><b>&#8377;${totalBeforeOffer}</b></td>
 													</tr>
 													<c:if
 														test="${couponCodeAppliedMessage != null and couponCodeAppliedMessage.contains('Hurray..')}">
 														<tr style="color: #ff00a9;" class="total-cost">
-															<td colspan="5"></td>
-															<td><b>Offer applied</b></td>
+															<td colspan="7"></td>
+															<td><b>Your Savings</b></td>
 															<td><strong>&#8377;${savings}</strong></td>
 														</tr>
 													</c:if>
 													<tr class="total-cost">
-														<td colspan="5"></td>
+														<td colspan="7"></td>
 														<td><b>Net Total</b></td>
 														<td><b>&#8377; <c:if
 																	test="${couponCodeAppliedMessage != null and couponCodeAppliedMessage.contains('Hurray..')}">

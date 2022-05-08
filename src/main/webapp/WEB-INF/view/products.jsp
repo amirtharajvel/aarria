@@ -453,7 +453,7 @@
 													<%-- <span
 														class="actual_price">&#8377;${product.actualPrice}
 													</span>&nbsp;&nbsp;  --%>
-													<%-- <span class="offer_price">(${product.discount}%OFF)</span> --%>
+													 <span class="offer_price">(${product.discount}%OFF)</span>
 												</div>
 											</div>
 											<div style="width: 100%; text-align: left; color: #0F1111!important; font-weight: 400!important"

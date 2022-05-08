@@ -71,19 +71,6 @@
 								</div>
 
 								<div class="row">
-									<div class="col-lg-12"
-										style="border: 1px solid #94d869; padding: 5px; color: #449652;">
-										Price &nbsp; <input type="text" id="originalPrice" /> Weight
-										&nbsp; <input type="text" id="weight" /> Profit &nbsp; <input
-											type="text" id="profitToBeAdded" /> <input type="button"
-											onclick="calculateprice()" value="Get Selling Price" /> <span
-											id="calculate_price_result" style="color: #ff5b74;">
-									</div>
-								</div>
-								<!-- <div class="col-lg-6"></div> -->
-
-
-								<div class="row">
 									<div class="col-lg-6 first_row">
 										<form:errors class="error" path="name" />
 										Product Name
@@ -151,37 +138,15 @@
 
 									</div>
 								</div>
-								<%--<div class="row">
-									<div class="col-lg-6 first_row">
-										<form:errors class="error" path="igstRate" />
-										GST Percentage
-									</div>
-									<div class="col-lg-6">
-										<form:input class="form-control" path="igstRate" tabindex="4"
-											type="number" name="igstRate" title="" step="0.01" />
-
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-lg-6 first_row">
-										<form:errors class="error" path="igstCode" />
-										GST Code
-									</div>
-									<div class="col-lg-6">
-										<form:input class="form-control" path="igstCode" tabindex="4"
-											type="text" name="igstCode" title="" step="0.01" />
-
-									</div>
-								</div>
 								 <div class="row">
 									<div class="col-lg-6 first_row">
-										<form:errors class="error" path="offerQuantity" />
-										Offer Quantity
+										<form:errors class="error" path="offerCode" />
+										Offer Code
 									</div>
 									<div class="col-lg-6">
-										<form:input class="form-control" path="offerQuantity"
-											tabindex="4" type="text" name="offerQuantity"
-											title="Offer Quantity" />
+										<form:input class="form-control" path="offerCode"
+											tabindex="4" type="text" name="offerCode"
+											title="Offer Code" />
 									</div>
 								</div>
 								<div class="row">
@@ -195,65 +160,7 @@
 											title="Offer Price" />
 									</div>
 								</div>
-								<div class="row">
-									<div class="col-lg-6 first_row">
-										<form:errors class="error" path="offerCode" />
-										Offer Code
-									</div>
-									<div class="col-lg-6">
-										<form:input class="form-control" path="offerCode" tabindex="4"
-											type="text" name="offerCode" title="Offer code" />
-										<table class="table table-sm">
-											<tr>
-												<th>Offer Code</th>
-												<th>Offer Text</th>
-												<th>Quantity</th>
-											</tr>
-											<c:forEach items="${offers}" var="offer">
-												<tr>
-													<td>${offer.offerCode}</td>
-													<td>${offer.offerText}</td>
-													<td>${offer.offerQuantity}</td>
-												</tr>
-											</c:forEach>
-										</table>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-lg-6 first_row">
-										<form:errors class="error" path="offerText" />
-										Offer text
-									</div>
-									<div class="col-lg-6">
-										<form:input class="form-control" path="offerText" tabindex="4"
-											type="text" name="offerText"
-											title="Offer text to be displayed in Product Detail" />
-									</div>
-								</div> --%>
-								<%-- <div class="row">
-									<div class="col-lg-6 first_row">
-										<form:errors class="error" path="deliveryCharge" />
-										Delivery Charge
-									</div>
-									<div class="col-lg-6">
-										<form:input class="form-control" path="deliveryCharge"
-											tabindex="4" type="text" name="deliveryCharge"
-											title="Offer text to be displayed in Product Detail" />
 
-									</div>
-								</div> --%>
-								<%-- <div class="row">
-									<div class="col-lg-6 first_row">
-										<form:errors class="error" path="price" />
-										Stock
-									</div>
-									<div class="col-lg-6">
-										<form:input class="form-control" path="stock" tabindex="5"
-											type="number" name="stock" title="Stock in unit"
-											required="required" />
-
-									</div>
-								</div> --%>
 								<div class="row">
 									<div class="col-lg-6 first_row">Category</div>
 									<div class="col-lg-6">
@@ -367,64 +274,6 @@
 									</div>
 								</div>
 
-								<%-- <div class="row">
-									<div class="col-lg-6 first_row">CDN Direct Urls</div>
-									<div class="col-lg-6">
-										<table id="cdn_table" class="table table-striped">
-											<tr>
-												<th>Urls</th>
-											</tr>
-											<tr>
-												<td><form:input class="form-control" type="text"
-														path="cdnDirectUrls[0]" /></td>
-
-											</tr>
-											<tr>
-												<td><form:input class="form-control" type="text"
-														path="cdnDirectUrls[1]" /></td>
-
-											</tr>
-											<tr>
-												<td><form:input class="form-control" type="text"
-														path="cdnDirectUrls[2]" /></td>
-											</tr>
-											<tr>
-												<td><form:input class="form-control" type="text"
-														path="cdnDirectUrls[3]" /></td>
-
-											</tr>
-											<tr>
-												<td><form:input class="form-control" type="text"
-														path="cdnDirectUrls[4]" /></td>
-
-											</tr>
-										</table>
-									</div>
-								</div> --%>
-
-								<div class="row">
-									<div class="col-lg-6 first_row">Show Discount</div>
-									<div class="col-lg-6">
-										<form:checkbox class="form-control" path="isShowDiscount"
-											name="isShowDiscount" />
-									</div>
-								</div>
-
-								<div class="row">
-									<div class="col-lg-6 first_row">Weight (In Grams)</div>
-									<div class="col-lg-6">
-										<form:input class="form-control" path="weight" tabindex="6"
-											type="number" name="weight" title="Weight in Grams"
-											step="0.01" />
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-lg-6 first_row">Video</div>
-									<div class="col-lg-6">
-										<form:input class="form-control" path="video" tabindex="7"
-											type="text" name="video" title="Video URL" />
-									</div>
-								</div>
 								<div class="row" style="display: none;">
 									<div class="col-lg-6 first_row">Colors</div>
 									<div class="col-lg-6">

@@ -22,6 +22,11 @@ public class AddProductDto {
 	@Digits(message = "Only 7 integers 2 fractions allowed", fraction = 2, integer = 7)
 	private Double price;
 
+	@Digits(message = "Only 7 integers 2 fractions allowed", fraction = 2, integer = 7)
+	private Double offerPrice;
+
+	private List<String> couponCodes = new ArrayList<>();
+
 	private LinkedHashMap<Long, String> rendercategories = new LinkedHashMap<Long, String>();
 
 	private Set<Long> categories = new HashSet<>();
@@ -64,8 +69,6 @@ public class AddProductDto {
 
 	private Integer offerQuantity;
 
-	private Double offerPrice;
-
 	private String offerCode;
 
 	private String deliveryCharge = "FREE SHIPPING";
@@ -104,8 +107,6 @@ public class AddProductDto {
 	}
 
 	private void addDefaultSearcheableAttributes() {
-		SearchableAttributeDto brand = new SearchableAttributeDto("Brand", "");
-		searchableAttributes.add(brand);
 
 		SearchableAttributeDto type = new SearchableAttributeDto("Type", "");
 		searchableAttributes.add(type);

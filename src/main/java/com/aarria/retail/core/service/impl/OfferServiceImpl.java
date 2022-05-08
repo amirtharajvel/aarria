@@ -6,94 +6,58 @@ import org.springframework.stereotype.Service;
 @Service
 public class OfferServiceImpl implements OfferService {
 
-	// offer codes
-	private static final String FALLS_200 = "FALLS200";
-	private static final String BIGTREAT = "BIGTREAT";
+    // offer codes
+    private static final String SPECIAL = "SPECIAL";
 
-	@Override
-	public String getCouponCode(String code) {
-		if (code != null) {
-			if (code.equals(FALLS_200)) {
-				return FALLS_200;
-			} else if (code.equals(BIGTREAT)) {
-				return BIGTREAT;
-			}
-		}
+    @Override
+    public Double getPriceAfterCouponCodeApplied(String code, Double price) {
 
-		return null;
-	}
+        if (code != null) {
+            try {
+                return (price - Double.valueOf(code.replace(SPECIAL, "")));
 
-	@Override
-	public double availOfferForWholeOrder(double total, int totalQuantity) {
-		return calculateTotalAfterOffer(total, totalQuantity);
-	}
+            } catch (Exception e) {
+                System.out.println("Invalid coupon code " + e);
+            }
+        }
 
-	@Override
-	public double calculateSavings(double total, int totalQuantity) {
-		double totalSavings = total;
-		if (total > 1999) {
-			totalSavings = savings500(total, totalQuantity);
-		} else {
-			totalSavings = savings200And50(total, totalQuantity);
-		}
+        return price;
+    }
 
-		return totalSavings;
-	}
+    @Override
+    public double availOfferForWholeOrder(double total, int totalQuantity) {
+        return calculateTotalAfterOffer(total, totalQuantity);
+    }
 
-	@Override
-	public String isValidCouponCode(double total, String couponCode) {
+    @Override
+    public double calculateSavings(double total, int totalQuantity) {
+        double totalSavings = total;
 
-		String isValidCoupon = "Invalid Coupon code";
-		if (total > 1999
-				&& (couponCode.trim().equalsIgnoreCase(BIGTREAT) || couponCode.trim().equalsIgnoreCase(FALLS_200))) {
-			isValidCoupon = "Hurray.. Coupon code applied!!";
-		} else if (total < 2000 && couponCode.trim().equalsIgnoreCase(FALLS_200)) {
-			isValidCoupon = "Hurray.. Coupon code applied!! Buy Any 2 to get Rs.200 Off. Buy above Rs.2000 to get Rs.500 off";
-		} else if (couponCode.trim().equalsIgnoreCase(BIGTREAT)) {
-			isValidCoupon = "Please purchase above Rs.2000 to avail this offer. Apply FALLS200 to avail other discounts.";
-		}
+        return totalSavings;
+    }
 
-		return isValidCoupon;
-	}
+    @Override
+    public String isValidCouponCode(boolean isValid) {
 
-	// private methods
-	private static double calculateTotalAfterOffer(double total, int totalQuantity) {
+        String isValidCoupon = "Invalid Coupon code";
 
-		double totalAfterOffer = total;
-		if (total > 1999) {
-			totalAfterOffer = offer2000(total, totalQuantity);
-		} else {
-			totalAfterOffer = offer200And50(total, totalQuantity);
-		}
+        if (isValid) {
+            isValidCoupon = "Hurray.. Coupon code applied!!";
+        }
 
-		return totalAfterOffer;
-	}
+        return isValidCoupon;
+    }
 
-	private static double offer200And50(double total, int totalQuantity) {
-		int howmanytwosets = totalQuantity / 2;
-		double totalAfterOffer = total - (howmanytwosets * 200);
+    // private methods
+    private static double calculateTotalAfterOffer(double total, int totalQuantity) {
 
-		if (totalQuantity % 2 != 0) {
-			totalAfterOffer = totalAfterOffer - 50;
-		}
-		return totalAfterOffer;
-	}
+        double totalAfterOffer = total;
 
-	private static double offer2000(double total, int totalQuantity) {
-		return total - 500;
-	}
+        return totalAfterOffer;
+    }
 
-	// calculate savings
-	private double savings200And50(double total, int totalQuantity) {
-		return totalQuantity % 2 == 0 ? ((totalQuantity / 2) * 200) : (((totalQuantity / 2) * 200) + 50);
-	}
+    public static void main() {
 
-	private double savings500(double total, int totalQuantity) {
-		return 500;
-	}
-
-	public static void main() {
-
-	}
+    }
 
 }
