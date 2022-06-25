@@ -8035,7 +8035,8 @@ slider .carousel .carousel-control {
 }
 
 .products-div .pro-list .pro-box .pro-bottom .offer_price {
-    color: #62bd7f
+    color: #62bd7f;
+    size:10px;
 }
 
 .products-div .pro-list .pro-box .pro-bottom a {

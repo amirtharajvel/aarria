@@ -52,12 +52,7 @@ public class ProductDto {
 	}
 
 	private Integer retrieveDiscount(Product product) {
-		// Show the discount in UI ONLY if it is greater than 1%
-		if (product.getDiscount() != null && product.getDiscount() > 1) {
-			return product.getDiscount();
-		}
-
-		return null;
+		return  product.getOfferPrice() != null ? product.getOfferPrice().intValue() : null;
 	}
 
 	private void createShortName() {

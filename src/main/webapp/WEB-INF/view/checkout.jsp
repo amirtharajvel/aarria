@@ -233,7 +233,7 @@
 											<div style="width: 100%;">
 												<div style="color: #666; font-weight: bold;">
 													<c:if test="${couponCodeAppliedMessage != '' }">
-														<span style="color: #ff00a9; font-weight: bold;">${couponCodeAppliedMessage}</span>
+														<span style="color: #FFA500; font-weight: bold;">${couponCodeAppliedMessage}</span>
 													</c:if>
 													&nbsp;&nbsp;
 												</div>
@@ -313,7 +313,9 @@
 																	href="product?id=${product.pid}"><img
 																		src="${product.image}" height="100" alt=""></a></td>
 																<td><a target="_blank"
-																	href="product?id=${product.pid}">${product.name}</a></td>
+																	href="product?id=${product.pid}">${product.name}</a>
+																	<span style="color:#ff00a9;"><br/> <strong>Use Code: ${product.offerCode}<strong></span>
+																	</td>
 																<td>${product.size}</td>
 																<td>
 																	<table>
@@ -351,7 +353,7 @@
 																<td><c:if
 																		test="${couponCodeAppliedMessage == 'Hurray.. Coupon code applied!!' }">
 																		<span
-																			style="color: #ff00a9; font-weight: bold; margin-left: 2%;">&#8377;
+																			style="color: #FFA500; font-weight: bold; margin-left: 2%;">&#8377;
 																			${product.amountAfterOfferApplied }</span>
 																	</c:if></td>
 																<td id="totalunitprice${product.pid}${product.size}">${product.price}</td>
