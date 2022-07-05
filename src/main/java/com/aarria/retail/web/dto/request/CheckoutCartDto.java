@@ -23,8 +23,8 @@ public class CheckoutCartDto {
 	public CheckoutCartDto(Cart cart, Product product) {
 		this.setImage(cart.getColorImage());
 		String name = cart.getProduct().getName();
-		if (name != null && name.length() > 60) {
-			name = name.substring(0, 60) + "...";
+		if (name != null && name.length() > 40) {
+			name = name.substring(0, 40) + "...";
 		}
 		this.setName(name);
 

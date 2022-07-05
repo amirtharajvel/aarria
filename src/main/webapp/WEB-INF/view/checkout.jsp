@@ -314,7 +314,9 @@
 																		src="${product.image}" height="100" alt=""></a></td>
 																<td><a target="_blank"
 																	href="product?id=${product.pid}">${product.name}</a>
+																	<c:if test="${product.offerCode != null}">
 																	<span style="color:#ff00a9;"><br/> <strong>Use Code: ${product.offerCode}<strong></span>
+																	</c:if>
 																	</td>
 																<td>${product.size}</td>
 																<td>
