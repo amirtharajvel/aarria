@@ -472,7 +472,7 @@ public class Util {
             if(CollectionUtils.isNotEmpty(orderedItems)) {
                 Product product = orderedItems.get(0).getProduct();
                 if(product != null) {
-                    return product.getName();
+                    return product.getName().substring(0,25) + "...";
                 }
             }
         }
