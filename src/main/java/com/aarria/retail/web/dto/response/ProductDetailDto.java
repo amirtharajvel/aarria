@@ -17,6 +17,8 @@ public class ProductDetailDto {
 
 	private Integer actualPrice;
 
+	private Integer offerPrice;
+
 	private Integer price;
 
 	private Integer discount;
@@ -49,6 +51,8 @@ public class ProductDetailDto {
 
 	private String offer;
 
+	private String offerCode;
+
 	private Map<String, Integer> productStock = new HashMap<>();
 
 	private Boolean isAtleastOneSizeHasStock;
@@ -71,6 +75,14 @@ public class ProductDetailDto {
 		}
 
 		return this.breadcrumbs.size();
+	}
+
+	public String getOfferCode() {
+		return offerCode;
+	}
+
+	public void setOfferCode(String offerCode) {
+		this.offerCode = offerCode;
 	}
 
 	public String getName() {
@@ -103,6 +115,22 @@ public class ProductDetailDto {
 
 	public void setPrice(Integer price) {
 		this.price = price;
+	}
+
+	public Integer getOfferPrice() {
+		return offerPrice;
+	}
+
+	public void setOfferPrice(Integer offerPrice) {
+		this.offerPrice = offerPrice;
+	}
+
+	public Boolean getAtleastOneSizeHasStock() {
+		return isAtleastOneSizeHasStock;
+	}
+
+	public void setAtleastOneSizeHasStock(Boolean atleastOneSizeHasStock) {
+		isAtleastOneSizeHasStock = atleastOneSizeHasStock;
 	}
 
 	public Integer getDiscount() {

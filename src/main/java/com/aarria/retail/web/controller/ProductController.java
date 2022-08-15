@@ -125,7 +125,7 @@ public class ProductController {
 		refinersDto.setMaxPrice(productListDto.getMaxPrice().intValue());
 		refinersDto.setMinPrice(productListDto.getMinPrice().intValue());
 
-		List<ProductDto> productDtos = new ArrayList<ProductDto>();
+		List<ProductDto> productDtos = new ArrayList<>();
 
 		for (Product p : productListDto.getProducts()) {
 			ProductDto dto = new ProductDto(p);

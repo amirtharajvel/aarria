@@ -142,6 +142,15 @@ public class ProductDetailsController {
 				price = product.getPrice().intValue();
 			}
 
+			if(product.getOfferPrice() != null) {
+				dto.setOfferPrice((product.getOfferPrice().intValue()));
+
+				if(product.getOfferCode() != null) {
+					dto.setOfferCode(product.getOfferCode());
+				}
+
+			}
+
 			dto.setPrice(price);
 
 			double price1 = product.getPrice();

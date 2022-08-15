@@ -169,11 +169,15 @@ img:hover {
 					type="hidden" id="is_nosize_product"
 					value="${ product.productStock['NA'] != null}" />
 
-				<c:if test="${product.offer != null and product.offer != ''}">
+				<c:if test="${product.offerPrice != null and product.offerPrice != ''}">
 					<div id="offer_container">
-						<span class="label label-warning">Offer</span> ${product.offer}
+						<span class="label label-warning">Offer Price</span> <i class="fa fa-inr"></i>${product.offerPrice}
+						<c:if test="${product.offerCode != null and product.offerCode != ''}">
+						<span style="color: #b19975;font-size:12px;">Use code: ${product.offerCode}</span>
+						</c:if>
 					</div>
 				</c:if>
+
 
 				<c:if test="${product.deliveryCharge != null}">
 					<div id="delivery_charge_container">
