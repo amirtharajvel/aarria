@@ -402,7 +402,7 @@
 														<td colspan="4"><b>Payment method :</b>&nbsp;&nbsp;&nbsp;
 															<label class="radio-inline"><input type="radio"
 																name="returnCashMethod" checked="checked" value="0">Cash
-																on delivery</label> <label class="radio-inline"><input
+																on delivery</label> <label class="radio-inline"><input disabled
 																type="radio" name="returnCashMethod" value="1">Netbanking
 																/ Credit/Debit Card / Wallet / UPI </label></td>
 														<td class="text-right"><button
